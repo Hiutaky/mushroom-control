@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "list": "node ./src/list.js",
-    "frontend": "cd src/frontend & yarn --cwd ./src/frontend start",
+    "frontend": "cd src/frontend & npm run --cwd ./src/frontend start",
     "start": "nodemon ./src/index.js",
     "serialMonitor": "node ./src/arduino/serialReader.js",
     "test": "echo \"Error: no test specified\" && exit 1"

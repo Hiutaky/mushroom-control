@@ -18,7 +18,7 @@ const main = ( ) => {
     });
     
     const app = express();
-    const port = 8080;
+    const port = 3001;
     
     app.use(cors())
     
@@ -36,5 +36,4 @@ const main = ( ) => {
     app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}`);
     });
-
 }

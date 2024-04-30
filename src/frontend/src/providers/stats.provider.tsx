@@ -28,7 +28,7 @@ export const useStatsProvider = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:8080/info');
+      const response = await fetch('http://localhost:3001/info');
       const data = await response.json();
       setStats(data.reverse());
       setLastUpdate(new Date().getTime())
