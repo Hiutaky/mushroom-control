@@ -1,3 +1,3 @@
 import { SerialPort } from 'serialport'
 
-SerialPort.list().then( (list) => console.log(list))
+export const serialList = () => SerialPort.list().then( (list) => console.log(list))
