@@ -3,7 +3,6 @@ import db from "./db/db.js";
 import { parse } from "./utils.js";
 import express from 'express';
 import cors from "cors"
-
 const Arduino = getSerialReader()
 Arduino.parser.on('data', data => {
     console.log('got word from arduino:', parse(data));

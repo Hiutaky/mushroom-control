@@ -13,12 +13,22 @@ function App() {
       <Header />
       <div className="w-full flex flex-col items-center">
         <div className='container'>
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-3'>
             <div className='w-full'>
               <StatsChart />
             </div>
             <VerticalProgress 
-              value={stats[stats.length-1].temperature}
+              label='Temperature'
+              color="bg-red-500"
+              value={stats.length ? stats[stats.length-1].temperature : 0}
+            />
+            <VerticalProgress
+              color="bg-blue-500"
+              label='Humidity(%)'
+              min="0"
+              max="100"
+              unit="%"
+              value={stats.length ? stats[stats.length-1].humidity : 0}
             />
           </div>
         </div>

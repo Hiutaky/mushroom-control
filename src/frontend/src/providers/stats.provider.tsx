@@ -27,10 +27,14 @@ export const useStatsProvider = () => {
   const [lastUpdate, setLastUpdate] = useState<number>(0)
 
   const fetchStats = async () => {
-    const response = await fetch('http://localhost:8080/info');
-    const data = await response.json();
-    setStats(data.reverse());
-    setLastUpdate(new Date().getTime())
+    try {
+      const response = await fetch('http://localhost:8080/info');
+      const data = await response.json();
+      setStats(data.reverse());
+      setLastUpdate(new Date().getTime())
+    } catch ( e ) {
+      console.log( e )
+    }
   };
 
   useEffect(() => {
