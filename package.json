@@ -1,0 +1,23 @@
+{
+  "name": "mushroom-control",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd src/frontend & yarn --cwd ./src/frontend start",
+    "start": "nodemon ./src/index.js",
+    "serialMonitor": "node ./src/arduino/serialReader.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "nedb": "^1.8.0",
+    "nodemon": "^3.1.0",
+    "serialport": "^12.0.0",
+    "typescript": "^5.4.5"
+  }
+}
