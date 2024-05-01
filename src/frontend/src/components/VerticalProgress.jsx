@@ -2,7 +2,7 @@ import {useMemo} from "react"
 const VerticalProgress = ({
     label = `Temperature`,
     unit = `C`,
-    width = 32,
+    width = 28,
     value = 40,
     min = 0,
     max = 60,
@@ -10,33 +10,37 @@ const VerticalProgress = ({
 }) => {
 
     const perc = useMemo( () => {
-        return 100 / max * value
+        let _max = min >= 0 ? max : max + Math.abs(min)
+        let _value = min >= 0 ? value : value + Math.abs(min)
+        return 100 / _max * _value
     }, [value])
 
     return (
-        <div className="flex flex-col gap-3">
-            <span className="text-sm font-bold">{label}</span>
-            <div className="relative h-full">
-                <div className="min absolute bottom-0 border-b-2 w-full text-right">
-                    {min}{unit}
-                </div>
-                <div className="max absolute top-0 start-0 border-t-2 w-full text-right">
-                    {max}{unit}
-                </div>
-                <div className="value absolute start-0 w-full border-t-2 text-right" style={{ top: `${100-perc}%`}}>
-                    {value}{unit}
-                </div>
-                <div 
-                    className={`flex flex-col justify-end h-full bg-gray-500`}
-                    style={{
-                        width: `${width}px`
-                    }}
-                >
-                    <div className={` bg-danger w-full ${color} `}
+        <div className="flex flex-col gap-2">
+            <span className="text-xs font-bold text-gray-600">{label}</span>
+            <div className="relative h-full bg-gray-100 rounded-lg p-2 text-xs font-semibold">
+                <div className="relative h-full">
+                    <div className={` max absolute bottom-0 start-0  w-full ${ perc > 5 ? `text-right` : `text-white`} `}>
+                        {min}{unit}
+                    </div>
+                    <div className={` max absolute top-0 start-0  w-full ${ perc < 95 ? `text-right` : `text-white`} `}>
+                        {max}{unit}
+                    </div>
+                    <div className={` value absolute start-0 w-full  text-right transition-all duration-500`} style={{ top: `${100-perc}%`}}>
+                        <span className={` absolute end-0 top-0 ${perc <= 5 ? `mt-[-20px]` : `` }`}>{parseFloat(value).toFixed(2)}{unit}</span>
+                    </div>
+                    <div 
+                        className={`flex flex-col justify-end h-full bg-gray-500 rounded-lg`}
                         style={{
-                            height: `${perc}%`
+                            width: `${width}px`
                         }}
                     >
+                        <div className={`rounded-lg bg-danger w-full ${color} transition-all duration-500`}
+                            style={{
+                                height: `${perc}%`
+                            }}
+                        >
+                        </div>
                     </div>
                 </div>
             </div>

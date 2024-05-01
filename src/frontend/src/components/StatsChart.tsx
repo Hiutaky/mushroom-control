@@ -41,41 +41,73 @@ export const options = {
         y: {
             type: 'linear' as const,
             display: true,
-            position: 'right' as const,
+            position: 'left' as const,
             min: -10,
-            max: 60
+            max: 100
         },
         y1: {
             type: 'linear' as const,
             display: true,
             position: 'left' as const,
-            min: 20,
-            max: 100,
+            min: 0,
+            max: 50,
+        },
+        y2: {
+            type: 'linear' as const,
+            display: true,
+            position: 'right' as const,
+            fill: true,
+            min: 0,
+            max: 3,
+        },
+        y3: {
+            type: 'linear' as const,
+            display: true,
+            position: 'right' as const,
+            fill: true,
+            min: 0,
+            max: 4,
         },
     },
 };
 
 const StatsChart = () => {
     const { stats } = useStats()
+    const temperatureData = stats.map( s => parseFloat(s.temperature) );
+    const humidityData = stats.map( s => parseFloat(s.humidity) );
 
     const data = useMemo( () => {
         return {
             labels: stats.map( s => new Date(s.createdAt).toLocaleTimeString() ),
             datasets: [{
-                label: `Temperature`,
-                data: stats.map( s => s.temperature ),
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                label: `Humidity`,
+                data: humidityData,
+                backgroundColor: 'rgba(53, 162, 235, 1)',
+                borderColor: 'rgba(53, 162, 235, 1)',
                 yAxisID: 'y',
                 tension: 0.5,
-
+                pointStyle: false,
             },{
-                label: `Humidity`,
-                data: stats.map( s => s.humidity ),
-                orderColor: 'rgb(53, 162, 235)',
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                label: `Temperature`,
+                data: temperatureData,
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 yAxisID: 'y1',
-                tension: 0.5
+                tension: 0.5,
+                pointStyle: false,
+            },{
+                label: `Light`,
+                data: stats.map( s => s.light ? 1 : 0 ),
+                borderColor: 'green',
+                yAxisID: 'y2',
+                pointStyle: false,
+            },{
+                label: `Humidifier`,
+                data: stats.map( s => s.humidifier ),
+                backgroundColor: 'black',
+                borderColor: 'black',
+                yAxisID: 'y3',
+                pointStyle: false,
             }]
         }
     }, [stats])

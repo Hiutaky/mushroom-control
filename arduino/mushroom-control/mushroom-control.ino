@@ -1,57 +1,75 @@
 #include "DHT.h"
 
-#define DHT_P 8//d
-#define LED_P A1
-#define FAN_P A2
-#define HUM_P A3
+#define DHT_P 8
+#define LED_P A1//12v, 0.5ah - 6w
+#define FAN_P A2//12v, 0.5ah - 6w
+#define HUM_P A3//24v, 0.8ah - 20w
+//total consume = 32w/a
+
 #define DHTTYPE DHT11
-#define UPDATE_INTERVAL 6000 //in ms
+#define UPDATE_INTERVAL 10000
+
+#define HUM_ON_THRESOLD 75
+#define HUM_OFF_THRESOLD 90
+
+#define HOURS_12 60 * 60 * 12 * 1000
 
 DHT dht(DHT_P, DHTTYPE);
 
 bool ledActive = false;
-bool fanActive = false;
 bool humActive = false;
+int timer = 0;
 
 void setup() {
-  Serial.begin(9600); // Starts the serial communication
   pinMode(LED_P, OUTPUT);
   pinMode(FAN_P, OUTPUT);
   pinMode(HUM_P, OUTPUT);
+  Serial.begin(9600);
   dht.begin();
 }
 void loop() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  String payload = "temperature:" + String(t) +",humidity:" + String(h);
-  Serial.println(payload);
   
-  if( humActive ) {
-    digitalWrite(HUM_P, LOW);
-    humActive = false;
-  } else {
+  checkHumidifier();
+  checkLight();
+  
+  String payload = 
+    "temperature:" + String(t) +
+    ",humidity:" + String(h) +
+    ",humidifier:" + String(humActive) +
+    ",light:" + String(ledActive);
+  Serial.println(payload);
+
+  delay(UPDATE_INTERVAL);
+}
+
+void checkHumidifier(float humidity) {
+  //activate humidifier if humidity <= minimum threshold
+  if( ! humActive && humidity <= HUM_ON_THRESOLD ) {
+    digitalWrite(FAN_P, HIGH);
     digitalWrite(HUM_P, HIGH);
     humActive = true;
   }
-  
-  if( ledActive ) {
-    digitalWrite(LED_P, LOW);
-    ledActive = false;
-  } else {
+  //deactivate humidifier if humidity >= max threshold
+  if( humActive && humidity >= HUM_OFF_THRESOLD ) {
+    digitalWrite(FAN_P, LOW);
+    digitalWrite(HUM_P, LOW);
+    humActive = false;
+  }
+}
+
+void checkLight() {
+  //12 hours on - 12 hours off
+  if( ! ledActive && timer >= HOURS_12 ) {
     digitalWrite(LED_P, HIGH);
     ledActive = true;
+    timer = 0;
   }
-  
-  if( fanActive ) {
-    digitalWrite(FAN_P, LOW);
-    fanActive = false;
-  } else {
-    digitalWrite(FAN_P, HIGH);
-    fanActive = true;
+  if( ledActive && timer >= HOURS_12 ) {
+    digitalWrite(LED_P, LOW);
+    ledActive = false;
+    timer = 0;
   }
-  
-  delay(6000);
-  
-
-  
+  timer += UPDATE_INTERVAL;
 }

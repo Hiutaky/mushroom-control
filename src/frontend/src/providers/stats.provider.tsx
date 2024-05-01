@@ -4,6 +4,8 @@ export type Stat = {
   createdAt: number;
   temperature: number;
   humidity: number;
+  humidifier: boolean;
+  light: boolean;
 }
 
 type StatsState = {
@@ -41,7 +43,7 @@ export const useStatsProvider = () => {
     fetchStats();
     const interval = setInterval( () => {
       fetchStats();
-    }, 6000)
+    }, 10000)
     return () => clearInterval(interval)
   }, []);
 

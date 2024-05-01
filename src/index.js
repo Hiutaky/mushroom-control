@@ -3,32 +3,67 @@ import db from "./db/db.js";
 import { parse } from "./utils.js";
 import express from 'express';
 import cors from "cors"
-import { serialList } from "./list.js";
 
-serialList().then( () => main() )
+const app = express();
+const port = 3001;
+
+let updates = 0
+
+const fake = true
 
 const main = ( ) => {
-    const Arduino = getSerialReader()
-    Arduino.parser.on('data', data => {
-        console.log('got word from arduino:', parse(data));
-        db.insert({
-            createdAt: new Date().getTime(),
-            ...parse(data)
-        })
-    });
-    
-    const app = express();
-    const port = 3001;
-    
+    /** ARDUINO READ */
+    let humidifier, light = true
+    let humidity = 60
+    let temperature = 19
+
+    let count = 0
+
+    if( ! fake ) {
+        const Arduino = getSerialReader()
+        Arduino.parser.on('data', data => {
+            db.insert({
+                createdAt: new Date().getTime(),
+                ...parse(data)
+            })
+        });
+    } else
+        setInterval( () => {
+            const randHumDif = Math.floor( Math.random() * 200 ) / 100
+            if( humidity > 85 )
+                humidifier = false
+            if( humidity < 65 )
+                humidifier = true
+            if( humidifier ) {
+                humidity += randHumDif
+                temperature -= randHumDif / 2
+            } else {
+                humidity -= randHumDif / 2
+                temperature += randHumDif / 2
+            }
+
+            db.insert({
+                createdAt: new Date().getTime(),
+                temperature: temperature,
+                humidity: humidity,
+                humidifier,
+                light
+            })
+            if( count === 30 )
+                light = ! light
+            count++
+        }, 10000)
+
+    /** APP */
     app.use(cors())
-    
+
     app.get('/info', (req, res) => {
-        db.find({}).sort({ createdAt: -1 }).limit(1000).exec((err, docs) => {
+        db.find({}).sort({ createdAt: -1 }).limit(60).exec((err, docs) => {
             if (err) {
                 console.error(err);
                 res.status(500).send('Error occurred while fetching data');
             } else {
-                res.json(docs.filter( ( d, i ) => parseInt( i / 20 ) === i/20  ));
+                res.json(docs);
             }
         });
     });
@@ -37,3 +72,4 @@ const main = ( ) => {
         console.log(`Server is running at http://localhost:${port}`);
     });
 }
+main()
