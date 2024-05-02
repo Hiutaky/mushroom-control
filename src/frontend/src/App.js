@@ -18,9 +18,9 @@ function App() {
     <div className="bg-dark">
       <Header />
       <div className="w-full flex flex-col items-center">
-        <div className='container'>
+        <div className='container flex flex-col gap-3'>
           <div className='grid grid-cols-[1fr_20%] gap-3'>
-            <div className='w-full'>
+            <div className='w-full p-2 border'>
               <StatsChart />
             </div>
             <div className="flex flex-col gap-3 p-3 border">
@@ -62,6 +62,23 @@ function App() {
                 />
               </div>
             </div>
+          </div>
+          <div className="text-sm px-2 border">
+            {
+              stats.length ? stats.map( (stat) => 
+              <div className='flex flex-row p-2 border-b-2 gap-3'>
+                <span>
+                  {new Date(stat.createdAt).toLocaleString()}
+                </span>
+                <span>
+                  {parseFloat(stat.temperature).toFixed(2)}°
+                </span>
+                <span>
+                  {parseFloat(stat.humidity).toFixed(2)}%
+                </span>
+              </div>
+              ) : ``
+            }
           </div>
         </div>
       </div>
