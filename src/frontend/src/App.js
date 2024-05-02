@@ -10,7 +10,7 @@ import icons from './icons/icons.js';
 
 function App() {
 
-  const { stats } = useStats()
+  const { stats, actions } = useStats()
 
   const last = stats[stats.length-1]
 
@@ -28,17 +28,20 @@ function App() {
               <div className="grid grid-cols-3 gap-2">
                 <Sensor 
                   label={'Light'}
-                  active={last?.light > 0}
+                  active={last ? last?.light > 0 : false}
                   icon={icons.Light}
+                  onClick={ () => last?.light == 0 ? actions.ON_LED() : actions.OFF_LED()  }
                 />
                 <Sensor 
                   label={'Fan'}
-                  active={last?.humidifier > 0}
+                  active={last?.humidifier > 0 || last?.fan > 0}
+                  onClick={ () => last?.humidifier == 0 && last.fan == 0 ? actions.ON_FAN() : actions.OFF_FAN()  }
                   icon={icons.Fan}
                 />
                 <Sensor 
                   label={'Mist'}
                   active={last?.humidifier > 0}
+                  onClick={ () => last?.humidifier == 0 ? actions.ON_HUM() : actions.OFF_HUM()  }
                   icon={icons.Humidity}
                 />
               </div>

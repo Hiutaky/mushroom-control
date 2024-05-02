@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-
+const uri = window.location.hostname; 
+const backend = 'http://'+uri+':3001/'
 export type Stat = {
   createdAt: number;
   temperature: number;
@@ -9,12 +10,14 @@ export type Stat = {
 }
 
 type StatsState = {
+  actions: object;
   lastUpdate: number;
   stats: Stat[];
   fetchStats: () => Promise<void>;
 }
 
 const defaultState : StatsState = {
+  actions: {},
   lastUpdate: 0,
   stats: [],
   async fetchStats() {
@@ -30,7 +33,7 @@ export const useStatsProvider = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:3001/info');
+      const response = await fetch(backend+'info');
       const data = await response.json();
       setStats(data.reverse());
       setLastUpdate(new Date().getTime())
@@ -38,6 +41,19 @@ export const useStatsProvider = () => {
       console.log( e )
     }
   };
+  
+  const _actions = [
+    'ON_LED',
+    'OFF_LED',
+    'ON_FAN',
+    'OFF_FAN',
+    'ON_HUM',
+    'OFF_HUM'
+  ];
+  const actions = {} 
+  _actions.map( (a) => 
+    actions[a] = () => fetch(backend + 'action?name='+ a )
+  )
 
   useEffect(() => {
     fetchStats();
@@ -48,6 +64,7 @@ export const useStatsProvider = () => {
   }, []);
 
   return {
+    actions,
     lastUpdate,
     stats,
     fetchStats

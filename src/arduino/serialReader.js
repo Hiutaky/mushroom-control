@@ -15,8 +15,12 @@ export const getSerialReader = () => {
     const {write} = port
     const actions = {}
     const names = [
-      "ON_LED",
-      "OFF_LED"
+      'ON_LED',
+      'OFF_LED',
+      'ON_FAN',
+      'OFF_FAN',
+      'ON_HUM',
+      'OFF_HUM'
     ]
     names.map( (n) => 
       actions[n] = () => port.write(n)
