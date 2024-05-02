@@ -12,64 +12,102 @@
 #define HUM_ON_THRESOLD 75
 #define HUM_OFF_THRESOLD 90
 
-#define HOURS_12 60 * 60 * 12 * 1000
+enum Actions { ON_LIGHT };
 
 DHT dht(DHT_P, DHTTYPE);
 
+uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
+//manual
+bool manualHum = false;
+bool manualLed = false;
+
+//automated
 bool ledActive = false;
 bool humActive = false;
-int timer = 0;
+
+
+float timer = 0;
 
 void setup() {
-  pinMode(LED_P, OUTPUT);
-  pinMode(FAN_P, OUTPUT);
-  pinMode(HUM_P, OUTPUT);
+  initPin(LED_P);
+  initPin(FAN_P);
+  initPin(HUM_P);
   Serial.begin(9600);
   dht.begin();
+}
+
+void initPin(int pin) {
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, HIGH);
 }
 void loop() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  
-  checkHumidifier();
+  checkHumidifier(h);
   checkLight();
+
+  readSerial();
   
   String payload = 
     "temperature:" + String(t) +
     ",humidity:" + String(h) +
     ",humidifier:" + String(humActive) +
-    ",light:" + String(ledActive);
+    ",light:" + String(ledActive) +
+    ",lightTimer:"+ String(timer);
   Serial.println(payload);
 
   delay(UPDATE_INTERVAL);
 }
 
+void readSerial() {
+  while(Serial.available()) {
+    String command = (String) Serial.readString();
+    if( command == "ON_LED" ) 
+      on_led();
+    if( command == "OFF_LED" ) 
+      off_led();
+  }
+}
+
+void on_led() {
+  if( ! manualLed )
+    manualLed = true;
+  digitalWrite(LED_P, LOW); 
+}
+void off_led() {
+  if( manualLed )
+    manualLed = false;
+  digitalWrite(LED_P, HIGH); 
+}
+
 void checkHumidifier(float humidity) {
   //activate humidifier if humidity <= minimum threshold
   if( ! humActive && humidity <= HUM_ON_THRESOLD ) {
-    digitalWrite(FAN_P, HIGH);
-    digitalWrite(HUM_P, HIGH);
+    digitalWrite(FAN_P, LOW);
+    digitalWrite(HUM_P, LOW);
     humActive = true;
   }
   //deactivate humidifier if humidity >= max threshold
   if( humActive && humidity >= HUM_OFF_THRESOLD ) {
-    digitalWrite(FAN_P, LOW);
-    digitalWrite(HUM_P, LOW);
+    digitalWrite(FAN_P, HIGH);
+    digitalWrite(HUM_P, HIGH);
     humActive = false;
   }
 }
 
 void checkLight() {
   //12 hours on - 12 hours off
-  if( ! ledActive && timer >= HOURS_12 ) {
-    digitalWrite(LED_P, HIGH);
-    ledActive = true;
-    timer = 0;
+  if( ! manualLed ) {
+    if( ! ledActive && timer >= HOURS_12 ) {
+      digitalWrite(LED_P, LOW);
+      ledActive = true;
+      timer = 0;
+    }
+    if( ledActive && timer >= HOURS_12 ) {
+      digitalWrite(LED_P, HIGH);
+      ledActive = false;
+      timer = 0;
+    }
+    timer += UPDATE_INTERVAL / 1000;//calculate seconds
   }
-  if( ledActive && timer >= HOURS_12 ) {
-    digitalWrite(LED_P, LOW);
-    ledActive = false;
-    timer = 0;
-  }
-  timer += UPDATE_INTERVAL;
 }

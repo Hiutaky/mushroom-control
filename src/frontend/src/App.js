@@ -28,17 +28,17 @@ function App() {
               <div className="grid grid-cols-3 gap-2">
                 <Sensor 
                   label={'Light'}
-                  active={last?.light}
+                  active={last?.light > 0}
                   icon={icons.Light}
                 />
                 <Sensor 
                   label={'Fan'}
-                  active={last?.humidifier}
+                  active={last?.humidifier > 0}
                   icon={icons.Fan}
                 />
                 <Sensor 
                   label={'Mist'}
-                  active={last?.humidifier}
+                  active={last?.humidifier > 0}
                   icon={icons.Humidity}
                 />
               </div>

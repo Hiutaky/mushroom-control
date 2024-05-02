@@ -97,7 +97,7 @@ const StatsChart = () => {
                 pointStyle: false,
             },{
                 label: `Light`,
-                data: stats.map( s => s.light ? 1 : 0 ),
+                data: stats.map( s => s.light ),
                 borderColor: 'green',
                 yAxisID: 'y2',
                 pointStyle: false,

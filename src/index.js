@@ -3,14 +3,17 @@ import db from "./db/db.js";
 import { parse } from "./utils.js";
 import express from 'express';
 import cors from "cors"
+import dotenv from "dotenv"
 
+dotenv.config()
 const app = express();
-const port = 3001;
+const port = process.env.SERVER_PORT;
 
 let updates = 0
 
-const fake = true
-
+const fake = process.env.ENV === "development"
+console.log('Running Server', 'Fake ?', fake)
+let Arduino = false
 const main = ( ) => {
     /** ARDUINO READ */
     let humidifier, light = true
@@ -20,8 +23,9 @@ const main = ( ) => {
     let count = 0
 
     if( ! fake ) {
-        const Arduino = getSerialReader()
+        Arduino = getSerialReader()
         Arduino.parser.on('data', data => {
+            console.log(data)
             db.insert({
                 createdAt: new Date().getTime(),
                 ...parse(data)
@@ -67,6 +71,14 @@ const main = ( ) => {
             }
         });
     });
+
+    app.get('/action', (req,res) => {
+        const { name } = req.query
+        console.log(Arduino.actions, name)
+        if( Arduino.actions[name] ) {
+            Arduino.actions[name]()
+        }
+    })
     
     app.listen(port, () => {
         console.log(`Server is running at http://localhost:${port}`);
