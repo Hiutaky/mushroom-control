@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react"
 import Button from "./Button"
+import Config from "../config"
 
 const Webcam = () => {
     const [base64Frame, setFrame] = useState('')
     const [ready, setReady] = useState(false)
-    const ws = useMemo( ( )=> new WebSocket('ws://localhost:3006'), [])
+    const ws = useMemo( ( )=> new WebSocket(`ws://${Config.host}3002`), [])
 
     const fetchWebcam = () => {
         ws.onopen = () => {
@@ -12,14 +13,7 @@ const Webcam = () => {
         }
         ws.onmessage = (message) => {
             setFrame(message.data)
-
         }
-        /*const fetchFrame = async () => {
-            const res = await (await fetch(`http://localhost:3001/stream`)).text()
-            setFrame(res)
-            setTimeout(fetchFrame, 3000)
-        }
-        fetchFrame()*/
     }
 
     useEffect( () => {
@@ -27,22 +21,27 @@ const Webcam = () => {
     }, [])
 
     return (
-        <div className="flex flex-col gap-2">
-            <div className="flex flex-row gap-2">
-                <Button
-                    disabled={!ready}
-                    onClick={ () => ws.send('START_STREAM')}
-                >
-                    Start
-                </Button>
-                <Button
-                    disabled={!ready}
-                    onClick={ () => ws.send('STOP_STREAM')}
-                >
-                    Stop
-                </Button>
+        <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-row gap-2 items-center justify-between w-full">
+                <h2 className="font-semibold flex flex-row gap-2 items-center">
+                    LiveStream <div className={`w-[12px] h-[12px] rounded-full ${ready ? `bg-green-500 animate-pulse` : `bg-red-500`} `}></div>
+                </h2>
+                <div className="flex flex-row gap-2">
+                    <Button
+                        disabled={!ready}
+                        onClick={ () => ws.send('START_STREAM')}
+                    >
+                        Start
+                    </Button>
+                    <Button
+                        disabled={!ready}
+                        onClick={ () => ws.send('STOP_STREAM')}
+                    >
+                        Stop
+                    </Button>
+                </div>
             </div>
-            <img src={base64Frame} />
+            <img className=" aspect-video bg-slate-600 rounded-lg animate-pulse" src={base64Frame} />
         </div>
     )
 }

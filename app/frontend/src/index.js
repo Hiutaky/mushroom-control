@@ -4,13 +4,13 @@ import './index.css';
 import './output.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StatsProvider } from './providers/stats.provider.tsx';
+import { BackendProvider } from './providers/backend.provider.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <StatsProvider>
+    <BackendProvider>
       <App />
-    </StatsProvider>
+    </BackendProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

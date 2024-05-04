@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useStats, Stat } from "../providers/stats.provider.tsx";
+import { useBackend } from "../providers/backend.provider.tsx";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -66,7 +66,7 @@ export const options = {
 };
 
 const StatsChart = () => {
-    const { stats } = useStats()
+    const { stats } = useBackend()
     const temperatureData = stats.map( s => parseFloat(s.temperature) );
     const humidityData = stats.map( s => parseFloat(s.humidity) );
 

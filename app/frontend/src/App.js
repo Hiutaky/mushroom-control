@@ -1,32 +1,40 @@
 
 import StatsChart from './components/StatsChart.tsx';
 import Header from './components/Header.jsx';
-import './App.css';
 import VerticalProgress from './components/VerticalProgress.jsx';
-import { useStats } from './providers/stats.provider.tsx';
+import { useBackend } from './providers/backend.provider.tsx';
 import Sensor from './components/Sensor.jsx';
-import { useMemo } from 'react';
 import icons from './icons/icons.js';
 import Webcam from './components/Webcam.jsx';
+import './App.css';
+import { useState } from 'react';
+import Box from './components/Box.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
+  const { stats, actions } = useBackend()
+  const [theme, setTheme] = useState('light')
+  const last = stats[0]
 
-  const { stats, actions } = useStats()
-
-  const last = stats[stats.length-1]
+  const toggleTheme = () => {
+    if( theme === 'light' )
+      setTheme('dark')
+    else
+      setTheme('light')
+  }
+  
 
   return (
-    <div className="bg-dark">
-      <Header />
-      <div className="w-full flex flex-col items-center">
-        <div className='container flex flex-col gap-3'>
-          <Webcam />
-          <div className='grid grid-cols-[1fr_20%] gap-3'>
-            <div className='w-full p-2 border'>
-              <StatsChart />
-            </div>
-            <div className="flex flex-col gap-3 p-3 border">
-              <span className=' text-gray-600 font-bold text-sm'>Controllers</span>
+    <div className={`${theme} bg-white dark:bg-slate-950 text-black dark:text-white min-h-[100vh]`}>
+      <Header 
+        toggleTheme={toggleTheme}
+        theme={theme}
+      />
+      <div className="w-full flex flex-col items-center pb-4">
+        <div className='px-2 container flex flex-col gap-3'>
+          <div className='grid md:grid-cols-[30%_1fr] lg:grid-cols-[20%_1fr] gap-3'>
+            <Box direction='col'>
+              <span className='font-bold text-sm'>Controllers</span>
               <div className="grid grid-cols-3 gap-2">
                 <Sensor 
                   label={'Light'}
@@ -47,7 +55,7 @@ function App() {
                   icon={icons.Humidity}
                 />
               </div>
-              <div className='w-full border'></div>
+              <div className='w-full border border-gray-100'></div>
               <div className="grid grid-cols-2 gap-2 h-full">
                 <VerticalProgress 
                   label='Temp. (C)'
@@ -66,27 +74,17 @@ function App() {
                   value={ last?.humidity}
                 />
               </div>
-            </div>
+            </Box>
+            <Box>
+              <Webcam />
+            </Box>
           </div>
-          <div className="text-sm px-2 border">
-            {
-              stats.length ? stats.reverse().map( (stat) => 
-              <div className='flex flex-row p-2 border-b-2 gap-3'>
-                <span>
-                  {new Date(stat.createdAt).toLocaleString()}
-                </span>
-                <span>
-                  {parseFloat(stat.temperature).toFixed(2)}°
-                </span>
-                <span>
-                  {parseFloat(stat.humidity).toFixed(2)}%
-                </span>
-              </div>
-              ) : ``
-            }
-          </div>
+          <Box>
+            <StatsChart />
+          </Box>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

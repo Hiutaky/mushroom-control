@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-const uri = window.location.hostname; 
-const backend = 'http://'+uri+':3001/'
+import Config from '../config';
+
+const backend = 'http://'+Config.host+'3001/'
+
 export type Stat = {
   createdAt: number;
   temperature: number;
@@ -9,33 +11,33 @@ export type Stat = {
   light: boolean;
 }
 
-type StatsState = {
+type BackendState = {
   actions: object;
   lastUpdate: number;
   stats: Stat[];
-  fetchStats: () => Promise<void>;
+  fetchBackend: () => Promise<void>;
 }
 
-const defaultState : StatsState = {
+const defaultState : BackendState = {
   actions: {},
   lastUpdate: 0,
   stats: [],
-  async fetchStats() {
+  async fetchBackend() {
     return;
   },
 }
 
-export const StatsContext = createContext(defaultState);
+export const BackendContext = createContext(defaultState);
 
-export const useStatsProvider = () => {
-  const [stats, setStats] = useState([]);
+export const useBackendProvider = () => {
+  const [stats, setBackend] = useState([]);
   const [lastUpdate, setLastUpdate] = useState<number>(0)
 
-  const fetchStats = async () => {
+  const fetchBackend = async () => {
     try {
       const response = await fetch(backend+'info');
       const data = await response.json();
-      setStats(data.reverse());
+      setBackend(data);
       setLastUpdate(new Date().getTime())
     } catch ( e ) {
       console.log( e )
@@ -56,10 +58,10 @@ export const useStatsProvider = () => {
   )
 
   useEffect(() => {
-    fetchStats();
+    fetchBackend();
     const interval = setInterval( () => {
-      fetchStats();
-    }, 10000)
+      fetchBackend();
+    }, 30000)
     return () => clearInterval(interval)
   }, []);
 
@@ -67,24 +69,24 @@ export const useStatsProvider = () => {
     actions,
     lastUpdate,
     stats,
-    fetchStats
+    fetchBackend
   }
 };
 
 
-export const useStats = () => {
-	return useContext(StatsContext);
+export const useBackend = () => {
+	return useContext(BackendContext);
 };
 
 interface Props {
 	children: ReactNode;
 }
 
-export const StatsProvider: React.FC<Props> = ({ children }) => {
-	const hookData = useStatsProvider();
+export const BackendProvider: React.FC<Props> = ({ children }) => {
+	const hookData = useBackendProvider();
 	return (
-		<StatsContext.Provider value={hookData as StatsState}>
+		<BackendContext.Provider value={hookData as BackendState}>
 			{children}
-		</StatsContext.Provider>
+		</BackendContext.Provider>
 	);
 };
