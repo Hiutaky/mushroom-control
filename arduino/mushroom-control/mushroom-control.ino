@@ -1,69 +1,78 @@
-#include "DHT.h"
+#include "DHT.h" //by adafruit (download entire library)
 
+#define UPDATE_INTERVAL 10000
+
+//temperature pin, type dht11
 #define DHT_P 8
+
+//relé module
 #define LED_P A1//12v, 0.5ah - 6w
 #define FAN_P A2//12v, 0.5ah - 6w
 #define HUM_P A3//24v, 0.8ah - 20w
 //total consume = 32w/a
 
 #define DHTTYPE DHT11
-#define UPDATE_INTERVAL 10000
 
+//humidifier settings
 #define HUM_ON_THRESOLD 75
 #define HUM_OFF_THRESOLD 90
-
-enum Actions { ON_LIGHT };
 
 DHT dht(DHT_P, DHTTYPE);
 
 uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
-//manual
+
+//manual controls - Override automatic
 bool manualHum = false;
 bool manualFan = false;
 bool manualLed = false;
 
-//automated
+//automatic controls
 bool ledActive = false;
 bool humActive = false;
 
-
-float timer = 0;
+float ledTimer = 0;
 
 void setup() {
-  initPin(LED_P);
-  initPin(FAN_P);
-  initPin(HUM_P);
+  initRele(LED_P);
+  initRele(FAN_P);
+  initRele(HUM_P);
   Serial.begin(9600);
   dht.begin();
 }
 
-void initPin(int pin) {
-  pinMode(pin, OUTPUT);
-  digitalWrite(pin, HIGH);
-}
 void loop() {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
   checkHumidifier(h);
-  checkLight();
+  checkLed();
 
   readSerial();
+  writeSerial(h, t);
   
+  delay(UPDATE_INTERVAL);
+}
+
+//set rele pins as output and disabled
+void initRele(int pin) {
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, HIGH);
+}
+
+void writeSerial(float h, float t) {
   String payload = 
     "temperature:" + String(t) +
     ",humidity:" + String(h) +
     ",humidifier:" + String(humActive || manualHum) +
     ",fan:" + String(humActive || manualFan) +
-    ",light:" + String(ledActive || manualLed) +
-    ",lightTimer:"+ String(timer);
+    ",led:" + String(ledActive || manualLed) +
+    ",ledTimer:"+ String(ledTimer);
   Serial.println(payload);
-
-  delay(UPDATE_INTERVAL);
 }
 
 void readSerial() {
   while(Serial.available()) {
     String command = (String) Serial.readString();
+    //serial commands dispatcher
     if( command == "ON_LED" ) 
       on_led();
     if( command == "OFF_LED" ) 
@@ -79,6 +88,7 @@ void readSerial() {
   }
 }
 
+//manual actions
 void on_led() {
   if( ! manualLed )
     manualLed = true;
@@ -101,7 +111,6 @@ void off_fan() {
   digitalWrite(FAN_P, HIGH); 
 }
 
-
 void on_hum() {
   if( ! manualHum )
     manualHum = true;
@@ -113,8 +122,9 @@ void off_hum() {
   digitalWrite(HUM_P, HIGH); 
 }
 
-
+//automated actions
 void checkHumidifier(float humidity) {
+  //if manual control over LED then skip
   if( ! manualHum ) {
     //activate humidifier if humidity <= minimum threshold
     if( ! humActive && humidity <= HUM_ON_THRESOLD ) {
@@ -131,19 +141,20 @@ void checkHumidifier(float humidity) {
   }
 }
 
-void checkLight() {
+void checkLed() {
   //12 hours on - 12 hours off
+  //if manualLed is on (you tanking over of controls) then skip
   if( ! manualLed ) {
-    if( ! ledActive && timer >= HOURS_12 ) {
+    if( ! ledActive && ledTimer >= HOURS_12 ) {
       digitalWrite(LED_P, LOW);
       ledActive = true;
-      timer = 0;
+      ledTimer = 0;
     }
-    if( ledActive && timer >= HOURS_12 ) {
+    if( ledActive && ledTimer >= HOURS_12 ) {
       digitalWrite(LED_P, HIGH);
       ledActive = false;
-      timer = 0;
+      ledTimer = 0;
     }
-    timer += UPDATE_INTERVAL / 1000;//calculate seconds
+    ledTimer += UPDATE_INTERVAL / 1000;//in seconds
   }
 }

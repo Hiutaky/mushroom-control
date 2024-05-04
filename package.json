@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "list": "node ./src/list.js",
-    "frontend": "cd src/frontend & npm run --cwd ./src/frontend start",
-    "start": "nodemon ./src/index.js",
-    "serialMonitor": "node ./src/arduino/serialReader.js",
+    "list": "node ./app/list.js",
+    "frontend": "cd app/frontend & npm run --cwd ./app/frontend start",
+    "start": "nodemon ./app/backend/index.js",
+    "serialMonitor": "node ./app/arduino/serialReader.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,9 +17,16 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "mux.js": "^6.3.0",
+    "nan": "^2.19.0",
     "nedb": "^1.8.0",
+    "node-canvas": "^2.9.0",
+    "node-webcam": "^0.8.2",
     "nodemon": "^3.1.0",
+    "readline-sync": "^1.4.10",
     "serialport": "^12.0.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "ws": "^8.17.0"
   }
 }

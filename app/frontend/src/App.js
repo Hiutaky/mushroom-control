@@ -7,6 +7,7 @@ import { useStats } from './providers/stats.provider.tsx';
 import Sensor from './components/Sensor.jsx';
 import { useMemo } from 'react';
 import icons from './icons/icons.js';
+import Webcam from './components/Webcam.jsx';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Header />
       <div className="w-full flex flex-col items-center">
         <div className='container flex flex-col gap-3'>
+          <Webcam />
           <div className='grid grid-cols-[1fr_20%] gap-3'>
             <div className='w-full p-2 border'>
               <StatsChart />
@@ -68,7 +70,7 @@ function App() {
           </div>
           <div className="text-sm px-2 border">
             {
-              stats.length ? stats.map( (stat) => 
+              stats.length ? stats.reverse().map( (stat) => 
               <div className='flex flex-row p-2 border-b-2 gap-3'>
                 <span>
                   {new Date(stat.createdAt).toLocaleString()}

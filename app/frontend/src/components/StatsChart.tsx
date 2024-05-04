@@ -30,13 +30,7 @@ export const options = {
       mode: 'index' as const,
       intersect: false,
     },
-    stacked: false,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart - Multi Axis',
-      },
-    },
+    stacked: true,
     scales: {
         y: {
             type: 'linear' as const,

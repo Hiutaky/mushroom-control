@@ -4,7 +4,7 @@ dotenv.config()
 
 const SERIAL = process.env.SERIAL
 
-export const getSerialReader = () => {
+export const getArduino = () => {
   try {
     const port = new SerialPort({ path: SERIAL, baudRate: 9600 });
 
