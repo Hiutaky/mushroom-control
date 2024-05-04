@@ -6,9 +6,11 @@ const backend = 'http://'+Config.host+'3001/'
 export type Stat = {
   createdAt: number;
   temperature: number;
+  temperatureOut?: number;
   humidity: number;
+  humidityOut?: number;
   humidifier: boolean;
-  light: boolean;
+  led: boolean;
 }
 
 type BackendState = {

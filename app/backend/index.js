@@ -73,7 +73,7 @@ const main = ( ) => {
     app.use(cors())
 
     app.get('/info', (req, res) => {
-        db.find({}).sort({ createdAt: -1 }).limit(60).exec((err, docs) => {
+        db.find({}).sort({ createdAt: -1 }).limit(1000).exec((err, docs) => {
             if (err) {
                 console.error(err);
                 res.status(500).send('Error occurred while fetching data');
@@ -133,6 +133,7 @@ WSS.on('connection', ws => {
             }
         } )
     };
+    sendCapture()
     ws.on('message', (event) => {
         event = event.toString()
         if( event === 'START_STREAM') {

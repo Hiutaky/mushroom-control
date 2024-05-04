@@ -38,9 +38,9 @@ function App() {
               <div className="grid grid-cols-3 gap-2">
                 <Sensor 
                   label={'Light'}
-                  active={last ? last?.light > 0 : false}
+                  active={last ? last?.led > 0 : false}
                   icon={icons.Light}
-                  onClick={ () => last?.light == 0 ? actions.ON_LED() : actions.OFF_LED()  }
+                  onClick={ () => last?.led == 0 ? actions.ON_LED() : actions.OFF_LED()  }
                 />
                 <Sensor 
                   label={'Fan'}

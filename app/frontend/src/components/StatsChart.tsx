@@ -45,6 +45,7 @@ export const options = {
             position: 'left' as const,
             min: 0,
             max: 50,
+            staked: false
         },
         y2: {
             type: 'linear' as const,
@@ -66,24 +67,43 @@ export const options = {
 };
 
 const StatsChart = () => {
-    const { stats } = useBackend()
-    const temperatureData = stats.map( s => parseFloat(s.temperature) );
-    const humidityData = stats.map( s => parseFloat(s.humidity) );
+    const { stats : _stats } = useBackend()
 
     const data = useMemo( () => {
+        const stats = _stats.reverse()
+        const temperatureData = stats.map( s => parseFloat(s.temperature) );
+        const temperatureOutData = stats.map( s => parseFloat(s.temperatureOut) );
+        const humidityData = stats.map( s => parseFloat(s.humidity) );
+        const humidityOut = stats.map( s => parseFloat(s.humidityOut) );
         return {
             labels: stats.map( s => new Date(s.createdAt).toLocaleTimeString() ),
             datasets: [{
-                label: `Humidity`,
+                label: `Humidity In`,
                 data: humidityData,
+                backgroundColor: '#3b82f6',
+                borderColor: '#3b82f6',
+                yAxisID: 'y',
+                tension: 0.5,
+                pointStyle: false,
+            },{
+                label: `Humidity Out`,
+                data: humidityOut,
                 backgroundColor: 'rgba(53, 162, 235, 1)',
                 borderColor: 'rgba(53, 162, 235, 1)',
                 yAxisID: 'y',
                 tension: 0.5,
                 pointStyle: false,
             },{
-                label: `Temperature`,
+                label: `Temperature In`,
                 data: temperatureData,
+                backgroundColor: '#ef4444',
+                borderColor: '#ef4444',
+                yAxisID: 'y1',
+                tension: 0.5,
+                pointStyle: false,
+            },{
+                label: `Temperature Out`,
+                data: temperatureOutData,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 yAxisID: 'y1',
@@ -91,7 +111,7 @@ const StatsChart = () => {
                 pointStyle: false,
             },{
                 label: `Light`,
-                data: stats.map( s => s.light ),
+                data: stats.map( s => s.led ),
                 borderColor: 'green',
                 yAxisID: 'y2',
                 pointStyle: false,
@@ -104,7 +124,7 @@ const StatsChart = () => {
                 pointStyle: false,
             }]
         }
-    }, [stats])
+    }, [_stats])
 
     return (
         <Line options={options} data={data} ></Line>

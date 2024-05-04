@@ -4,6 +4,7 @@
 
 //temperature pin, type dht11
 #define DHT_P 8
+#define DHT_OUT_P 2
 
 //relé module
 #define LED_P A1//12v, 0.5ah - 6w
@@ -17,7 +18,8 @@
 #define HUM_ON_THRESOLD 75
 #define HUM_OFF_THRESOLD 90
 
-DHT dht(DHT_P, DHTTYPE);
+DHT dht_in(DHT_P, DHTTYPE);
+DHT dht_out(DHT_OUT_P, DHTTYPE);
 
 uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
 
@@ -37,17 +39,21 @@ void setup() {
   initRele(FAN_P);
   initRele(HUM_P);
   Serial.begin(9600);
-  dht.begin();
+  dht_in.begin();
+  dht_out.begin();
 }
 
 void loop() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
+  float h = dht_in.readHumidity();
+  float t = dht_in.readTemperature();
+
+  float h_out = dht_out.readHumidity();
+  float t_out = dht_out.readTemperature();
   checkHumidifier(h);
   checkLed();
 
   readSerial();
-  writeSerial(h, t);
+  writeSerial(h, t, h_out, t_out);
   
   delay(UPDATE_INTERVAL);
 }
@@ -58,10 +64,12 @@ void initRele(int pin) {
   digitalWrite(pin, HIGH);
 }
 
-void writeSerial(float h, float t) {
+void writeSerial(float h, float t,float h_out, float t_out) {
   String payload = 
     "temperature:" + String(t) +
+    ",temperatureOut:" + String(t_out) +
     ",humidity:" + String(h) +
+    ",humidityOut:" + String(h_out) +
     ",humidifier:" + String(humActive || manualHum) +
     ",fan:" + String(humActive || manualFan) +
     ",led:" + String(ledActive || manualLed) +
