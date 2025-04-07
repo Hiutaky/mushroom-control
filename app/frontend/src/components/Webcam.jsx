@@ -41,7 +41,7 @@ const Webcam = () => {
                     </Button>
                 </div>
             </div>
-            <img className=" aspect-video bg-slate-600 rounded-lg " src={base64Frame} />
+            <img className="rotate-180 aspect-video bg-slate-600 rounded-lg " src={base64Frame} />
         </div>
     )
 }

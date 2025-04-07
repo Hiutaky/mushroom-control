@@ -7,6 +7,7 @@ import dotenv from "dotenv"
 import NodeWebcam from "node-webcam";
 import { WebSocketServer } from "ws"
 import Canvas from "node-canvas";
+import { keyInSelect } from "readline-sync";
 
 const { createCanvas, loadImage} = Canvas
 dotenv.config();
@@ -16,9 +17,19 @@ const fake = process.env.ENV === "development"
 const app = express();
 const port = process.env.SERVER_PORT;
 const wsPort = process.env.WS_PORT;
-const WSS = new WebSocketServer({ port: wsPort })
+const WSS = new WebSocketServer({ port: 3045 })
 
 let ffmpeg = false
+
+let lastState = {
+  createdAt: 0,
+  temperature: 0,
+  temperatureOut: 0,
+  humidity: 0,
+  humidityOut: 0,
+  humidifier: false,
+  led: false
+}
 
 let Arduino, 
     VideoSource = false
@@ -36,11 +47,11 @@ const main = ( ) => {
     if( ! fake ) {
         Arduino = getArduino()
         Arduino.parser.on('data', data => {
-            console.log(data)
-            db.insert({
+            lastState = {
                 createdAt: new Date().getTime(),
                 ...parse(data)
-            })
+            } 
+            db.insert(lastState)
         });
     } else
         setInterval( () => {
@@ -73,7 +84,7 @@ const main = ( ) => {
     app.use(cors())
 
     app.get('/info', (req, res) => {
-        db.find({}).sort({ createdAt: -1 }).limit(1000).exec((err, docs) => {
+        db.find({}).sort({ createdAt: -1 }).limit(5000).exec((err, docs) => {
             if (err) {
                 console.error(err);
                 res.status(500).send('Error occurred while fetching data');
@@ -121,27 +132,44 @@ WSS.on('connection', ws => {
     let interval = false
     const canva = createCanvas(720, 420)
     const context = canva.getContext('2d')
-    const sendCapture = () => {
+    const sendCapture = (cb = false) => {
         NodeWebcam.capture( "source", videoOpts, async function( err, data ) { 
             if( err ) {
+                return
                 throw err;
             } else {
                 const src = await loadImage(data)
                 context.drawImage( src, 0, 0, 720, 420 )
                 const buff = canva.toDataURL('image/jpeg', { quality: 0.7 })
                 ws.send(buff)
+                if( cb )
+                    cb()
             }
         } )
     };
-    sendCapture()
+    const waitForLed = (cb = false, elseCb = () => {} ) => {
+        if( lastState.led === "0") {
+            Arduino.actions.ON_LED()
+            const intervalLed = setInterval( () => {
+                if( lastState.led === "1" ) {
+                    clearInterval(intervalLed)
+                    sendCapture(cb)
+                } else { console.log('waiting for led') }
+            }, 1000)
+        } else elseCb()
+    }
+
+    waitForLed(Arduino.actions.OFF_LED, () => sendCapture())
+
     ws.on('message', (event) => {
         event = event.toString()
         if( event === 'START_STREAM') {
-            sendCapture()
-            interval = setInterval( () => sendCapture(), 2000)
+            waitForLed( () => interval = setInterval( () => sendCapture(), 2000) )
         }
-        if( event === 'STOP_STREAM')
+        if( event === 'STOP_STREAM') {
+            Arduino.actions.OFF_LED()
             clearInterval(interval)
+        }
 
     })
     ws.on('close', () => {
@@ -150,10 +178,12 @@ WSS.on('connection', ws => {
 })
 
 NodeWebcam.list( (videoSources) => {
-    VideoSource = 0//keyInSelect( videoSources, 'Select video source')
-    VideoSource = NodeWebcam.create({
-        ...videoOpts,
-        device: VideoSource
-    })
+    if( videoSources.length ) {
+        VideoSource = keyInSelect( videoSources, 'Select video source')
+        VideoSource = NodeWebcam.create({
+            ...videoOpts,
+            device: VideoSource
+        })
+    }
     main()
 })

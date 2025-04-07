@@ -1,5 +1,5 @@
 const Config = {
-    host: 'localhost:',//`localhost` ||  window.location.hostname
+    host: window.location.hostname+':'
 }
 
 export default Config
