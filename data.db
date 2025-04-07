@@ -43,6 +43,7 @@
 {"createdAt":1714522522734,"temperature":36,"humidity":0,"humdifier":false,"light":false,"_id":"0UPm2QGnhkEHgfCO"}
 {"createdAt":1714524675488,"temperature":20.94,"humidity":57.120000000000005,"light":false,"_id":"0VN4LCW9xy99Q66w"}
 {"createdAt":1714478517491,"temperature":"21.00","humidity":"51.00","_id":"0VZJpmJuQxGIS4yD"}
+{"createdAt":1714525146099,"temperature":20.15,"humidity":69.85,"humidifier":true,"light":true,"_id":"0aSILNQdSCtIhROj"}
 {"createdAt":1714470645641,"temperature":"20.40","humidity":"54.00","_id":"0cLf744qBvy7Tolq"}
 {"createdAt":1714518332259,"temperature":17,"humidity":20,"_id":"0cmShsKW9lyQ42sF"}
 {"createdAt":1714524715491,"temperature":19.48,"humidity":55.9,"humidifier":true,"light":false,"_id":"0d8KVGxBOLwecl5y"}
@@ -265,6 +266,7 @@
 {"createdAt":1714508619418,"temperature":"21.30","humidity":"64.00","_id":"3D3vJuLHQ224BJM5"}
 {"createdAt":1714484564551,"temperature":"21.40","humidity":"55.00","_id":"3DKACXEg5GrlGIMG"}
 {"createdAt":1714481134372,"temperature":"21.50","humidity":"55.00","_id":"3DbG5QJwYyNGCuYk"}
+{"createdAt":1714525256108,"temperature":19.38,"humidity":81.67999999999998,"humidifier":true,"light":true,"_id":"3DlzfSHmaYxe8Jns"}
 {"createdAt":1714478408249,"temperature":"21.00","humidity":"51.00","_id":"3ECzuEojSnZkJOj0"}
 {"createdAt":1714509705773,"temperature":"21.00","humidity":"63.00","_id":"3Gvxn3TkZ61CaJop"}
 {"createdAt":1714471343578,"temperature":"20.90","humidity":"52.00","_id":"3HREPrMdDw9JfV6g"}
@@ -337,6 +339,7 @@
 {"createdAt":1714472672713,"temperature":"21.70","humidity":"47.00","_id":"3wVR7oPGhYKXbuR7"}
 {"createdAt":1714485153235,"temperature":"21.40","humidity":"56.00","_id":"3xL3VZVnlEY0wy0S"}
 {"createdAt":1714484097218,"temperature":"21.90","humidity":"79.00","_id":"3yGrGH9v3agw8iqn"}
+{"createdAt":1714525226106,"temperature":19.45,"humidity":78.67999999999998,"humidifier":true,"light":true,"_id":"3yovIov0Mtimudcc"}
 {"createdAt":1714472745543,"temperature":"21.80","humidity":"45.00","_id":"3zMkxtLCijg39SGb"}
 {"createdAt":1714478644941,"temperature":"20.90","humidity":"51.00","_id":"3zkiFhEEo9OdrG7K"}
 {"createdAt":1714481559201,"temperature":"21.50","humidity":"56.00","_id":"3zkkUoVg17Uad5RR"}
@@ -710,6 +713,7 @@
 {"createdAt":1714519920835,"temperature":43,"humidity":13,"_id":"7tKZbJmOiFFQwU5y"}
 {"createdAt":1714517258048,"temperature":41,"humidity":18,"_id":"7tifZIPtQpqPGByv"}
 {"createdAt":1714508431276,"temperature":"21.30","humidity":"62.00","_id":"7uoQno0eoFXdymPe"}
+{"createdAt":1714525306115,"temperature":20.9,"humidity":85.43999999999998,"humidifier":false,"light":true,"_id":"7uwQKVY1rwiUd6b0"}
 {"createdAt":1714483987969,"temperature":"21.70","humidity":"55.00","_id":"7wqvVJFtcK51Oo8S"}
 {"temperature":"21.70","humidity":"68.00","_id":"7xCHaljpNiNDO749"}
 {"createdAt":1714518910388,"temperature":10,"humidity":10,"_id":"7y1WlxWkRuMtKqih"}
@@ -761,10 +765,12 @@
 {"createdAt":1714522903733,"temperature":18,"humidity":14,"humdifier":true,"light":true,"_id":"8U9CKkfhFkryj7IM"}
 {"createdAt":1714480010533,"temperature":"21.30","humidity":"51.00","_id":"8Uki5x9PWee7tFwL"}
 {"createdAt":1714474305267,"temperature":"21.10","humidity":"50.00","_id":"8VEKDiuiL8C1QoAB"}
+{"createdAt":1714525056092,"temperature":19.14,"humidity":61.1,"humidifier":true,"light":true,"_id":"8WSy40zIe6wF8PUJ"}
 {"createdAt":1714434466626,"temperature":"21.00","humidity":"69.00","_id":"8XUyu596i9HPy9Vy"}
 {"createdAt":1714481225410,"temperature":"21.50","humidity":"55.00","_id":"8Xab68tzClL2GkXn"}
 {"createdAt":1714436764498,"temperature":"22.50","humidity":"99.00","_id":"8YmzDCvd0CzS0lYJ"}
 {"createdAt":1714434660873,"temperature":"21.10","humidity":"69.00","_id":"8aFTKXjsfGU7R0C1"}
+{"createdAt":1714525176102,"temperature":19.58,"humidity":74.50999999999999,"humidifier":true,"light":true,"_id":"8aTINJWJctU46xGf"}
 {"createdAt":1714508607280,"temperature":"21.30","humidity":"63.00","_id":"8cxeTzoeqJY2bDo1"}
 {"createdAt":1714481607754,"temperature":"21.50","humidity":"56.00","_id":"8cxyGrCoqVIm7lMN"}
 {"createdAt":1714524064549,"temperature":20.57,"humidity":51.72,"light":false,"_id":"8dzxi4dxgcVXqnvD"}
@@ -829,6 +835,7 @@
 {"createdAt":1714520957871,"temperature":24,"humidity":11,"humdifier":true,"light":true,"_id":"99atyMVVXhu52xy0"}
 {"createdAt":1714480940158,"temperature":"21.30","humidity":"55.00","_id":"9ABUxwk4lswYUPye"}
 {"createdAt":1714479166881,"temperature":"20.90","humidity":"50.00","_id":"9BhY6TW5zEDUZIzQ"}
+{"createdAt":1714525356121,"temperature":19.85,"humidity":83.27,"humidifier":false,"light":true,"_id":"9C4nHvuUJCkm181Y"}
 {"createdAt":1714517053207,"temperature":29,"humidity":26,"_id":"9DjVPO2Xi14WH7KA"}
 {"createdAt":1714509608666,"temperature":"21.50","humidity":"62.00","_id":"9Dka3YbUS1C50rlp"}
 {"createdAt":1714481765552,"temperature":"21.50","humidity":"56.00","_id":"9EAAy1WecaFBKnhx"}
@@ -1312,6 +1319,7 @@
 {"createdAt":1714484673798,"temperature":"21.50","humidity":"55.00","_id":"EdO1Jx5LHnJuXs9J"}
 {"createdAt":1714482734896,"temperature":"21.70","humidity":"55.00","_id":"EdvEFeG6oOyhSVDj"}
 {"createdAt":1714434739773,"temperature":"21.10","humidity":"69.00","_id":"Eeb1hKtzPMcD3OtI"}
+{"createdAt":1714525106095,"temperature":20.5,"humidity":65.17999999999999,"humidifier":true,"light":true,"_id":"EgAnMTlf4fdhldgG"}
 {"createdAt":1714522756782,"temperature":7,"humidity":29,"humdifier":true,"light":true,"_id":"EgtAPaqMXEFF1ALN"}
 {"createdAt":1714521818021,"temperature":27,"humidity":18,"humdifier":true,"light":true,"_id":"EhIGAia96RGj1TKO"}
 {"createdAt":1714474432717,"temperature":"21.10","humidity":"49.00","_id":"EjOeiBAOmr4luCXF"}
@@ -1405,6 +1413,7 @@
 {"createdAt":1714477224774,"temperature":"21.10","humidity":"51.00","_id":"Fa3wviRALVpM0WSc"}
 {"temperature":"21.60","humidity":"67.00","_id":"FbESWixJio9JW9RC"}
 {"createdAt":1714475956052,"temperature":"21.40","humidity":"53.00","_id":"FbTdu1rvNQmea55m"}
+{"createdAt":1714525066093,"temperature":19.37,"humidity":61.120000000000005,"humidifier":true,"light":true,"_id":"FbcOXYClN0t7xIGu"}
 {"createdAt":1714509590458,"temperature":"21.70","humidity":"61.00","_id":"FbuSQNo7RyFo7q4G"}
 {"createdAt":1714508370585,"temperature":"21.50","humidity":"62.00","_id":"FcTE8RFYg3e6aGle"}
 {"temperature":"20.70","humidity":"70.00","_id":"FcaA3dXf9KzUeMiO"}
@@ -1469,6 +1478,7 @@
 {"createdAt":1714485159304,"temperature":"21.40","humidity":"56.00","_id":"GGKX8W2iak8oWjzA"}
 {"createdAt":1714478808806,"temperature":"20.90","humidity":"52.00","_id":"GGjFToEm5ENvKGYO"}
 {"createdAt":1714435832506,"temperature":"21.90","humidity":"69.00","_id":"GGo8KXzeQLsWKbzF"}
+{"createdAt":1714525456130,"temperature":20.54,"humidity":77.035,"humidifier":false,"light":false,"_id":"GH3PCOLq8vtWa1RP"}
 {"temperature":"20.40","humidity":"70.00","_id":"GHLAkUbeQvwb6So2"}
 {"createdAt":1714482759194,"temperature":"21.70","humidity":"55.00","_id":"GHfrPTVh8mpEQlFv"}
 {"createdAt":1714521926040,"temperature":7,"humidity":15,"humdifier":true,"light":true,"_id":"GIhdMOOxgVu2DRcq"}
@@ -1606,6 +1616,7 @@
 {"createdAt":1714481371071,"temperature":"21.50","humidity":"55.00","_id":"HxWbkqrS9m3FpuQF"}
 {"temperature":"20.70","humidity":"69.00","_id":"HyHlaEh0iez6xJXe"}
 {"createdAt":1714484212535,"temperature":"21.70","humidity":"56.00","_id":"HyVhQy5W4dA7QY5o"}
+{"createdAt":1714525406126,"temperature":20.05,"humidity":80.46,"humidifier":false,"light":false,"_id":"Hz3ZSfPq5wOoIRbC"}
 {"createdAt":1714479488586,"temperature":"21.00","humidity":"51.00","_id":"I06cd0jQd6hZkSkz"}
 {"createdAt":1714478814875,"temperature":"20.90","humidity":"51.00","_id":"I0KwZlrVN89H9BWs"}
 {"createdAt":1714436424627,"temperature":"21.90","humidity":"68.00","_id":"I0Rr1DLqsNK5Lbbm"}
@@ -1613,6 +1624,7 @@
 {"createdAt":1714495064735,"temperature":"24.70","humidity":"53.00","_id":"I0pWrfSrmfzOuCQH"}
 {"createdAt":1714519968842,"temperature":7,"humidity":31,"_id":"I1fTLp3U6j18AA1j"}
 {"createdAt":1714520352912,"temperature":19,"humidity":21,"_id":"I2iaHQ99UMcnYsSw"}
+{"createdAt":1714525426128,"temperature":20.04,"humidity":78.99,"humidifier":false,"light":false,"_id":"I46waQUNyLxXUlRN"}
 {"createdAt":1714471137232,"temperature":"20.80","humidity":"51.00","_id":"I5ruFGDBGS75KMjO"}
 {"createdAt":1714495149920,"temperature":"24.80","humidity":"53.00","_id":"I6bu8z8Wfv65GDC7"}
 {"createdAt":1714479713144,"temperature":"21.30","humidity":"51.00","_id":"I7RBB3JZspURMQ7H"}
@@ -1964,6 +1976,7 @@
 {"createdAt":1714434393798,"temperature":"21.00","humidity":"69.00","_id":"MKTt6P2Et6Xqg72x"}
 {"createdAt":1714470943021,"temperature":"20.60","humidity":"53.00","_id":"MKepbNq0QOBdipgy"}
 {"createdAt":1714472017263,"temperature":"21.10","humidity":"49.00","_id":"MPVZctB6MHmXhRrF"}
+{"createdAt":1714525216105,"temperature":20.72,"humidity":78.35999999999999,"humidifier":true,"light":true,"_id":"MR6wbsEni9gtMZDJ"}
 {"createdAt":1714518476288,"temperature":10,"humidity":1,"_id":"MRaU6H2FdCucbP33"}
 {"createdAt":1714519578770,"temperature":33,"humidity":36,"_id":"MRbsC0EQesM4lxQg"}
 {"temperature":"20.90","humidity":"71.00","_id":"MRxxloLgXEgKY1SL"}
@@ -2308,6 +2321,7 @@
 {"createdAt":1714518946392,"temperature":48,"humidity":36,"_id":"Qb8X31dnhQlqMAZH"}
 {"createdAt":1714509044249,"temperature":"20.70","humidity":"65.00","_id":"QbnppQpvlyqGEckW"}
 {"createdAt":1714475148865,"temperature":"21.40","humidity":"53.00","_id":"QcCOx8MVVgMMgkTr"}
+{"createdAt":1714525206104,"temperature":20.11,"humidity":78.34999999999998,"humidifier":true,"light":true,"_id":"QczeYoWHVNUkMhe3"}
 {"createdAt":1714480521858,"temperature":"21.40","humidity":"53.00","_id":"QdzthOx8O0UiJ45f"}
 {"createdAt":1714473516318,"temperature":"21.40","humidity":"49.00","_id":"Qe0s9Ip8qD6lZqqE"}
 {"createdAt":1714509274869,"temperature":"20.60","humidity":"64.00","_id":"QeqX6srPqi6zoGk7"}
@@ -2489,11 +2503,13 @@
 {"createdAt":1714517168008,"temperature":3,"humidity":25,"_id":"Svvs4G69BjfSmFxO"}
 {"createdAt":1714519392730,"temperature":33,"humidity":43,"_id":"Sx6GGtfPag92HQLC"}
 {"createdAt":1714475597977,"temperature":"22.00","humidity":"91.00","_id":"SyDaJYJ3P5c8mP7h"}
+{"createdAt":1714525196103,"temperature":20.02,"humidity":77.99999999999999,"humidifier":true,"light":true,"_id":"Syduqk7KJgAHS8ME"}
 {"createdAt":1714435727245,"temperature":"21.90","humidity":"69.00","_id":"SyrD5qLFrXx3H6mV"}
 {"createdAt":1714476223090,"temperature":"21.50","humidity":"51.00","_id":"T0T1vy6Ijwhejr2R"}
 {"temperature":"20.90","humidity":"69.00","_id":"T0cyxnwwiEqrQVMv"}
 {"createdAt":1714509887842,"temperature":"20.80","humidity":"64.00","_id":"T0nt5R7jl2JOMZX9"}
 {"createdAt":1714473285694,"temperature":"21.50","humidity":"48.00","_id":"T2bGDUibJHkZiRDZ"}
+{"createdAt":1714525386124,"temperature":20.02,"humidity":81.85,"humidifier":false,"light":false,"_id":"T3KhwaMobWiOWCJO"}
 {"createdAt":1714519998847,"temperature":8,"humidity":34,"_id":"T4GJ0fCMMZUjW4d3"}
 {"temperature":"20.90","humidity":"70.00","_id":"T4XpwPZpiyyn5sp2"}
 {"createdAt":1714434963783,"temperature":"21.10","humidity":"69.00","_id":"T4cQAkxOacAQtOZI"}
@@ -2536,6 +2552,7 @@
 {"createdAt":1714472593815,"temperature":"21.40","humidity":"49.00","_id":"TQU99w0ksMYq4aqE"}
 {"createdAt":1714520418941,"temperature":26,"humidity":8,"_id":"TRukvPnRUufc7tj4"}
 {"createdAt":1714480745942,"temperature":"21.40","humidity":"54.00","_id":"TRv0p9rtCebzpucq"}
+{"createdAt":1714525236106,"temperature":19.27,"humidity":80.53999999999998,"humidifier":true,"light":true,"_id":"TSEL68efuM8366Va"}
 {"createdAt":1714482711758,"temperature":"21.70","humidity":"55.00","_id":"TTTfvxll9a5NFeVd"}
 {"createdAt":1714472575608,"temperature":"21.30","humidity":"49.00","_id":"TVbOCoxczF104BSW"}
 {"temperature":"20.90","humidity":"69.00","_id":"TVuwSYNJ5az3P1aO"}
@@ -2622,6 +2639,7 @@
 {"temperature":"20.60","humidity":"70.00","_id":"UZBiRYLmKwyW9zrv"}
 {"createdAt":1714521794017,"temperature":41,"humidity":16,"humdifier":true,"light":true,"_id":"UbM8qu1AwJb7XZVP"}
 {"createdAt":1714479949842,"temperature":"21.10","humidity":"51.00","_id":"Uchpw3ZvjkqMjrfE"}
+{"createdAt":1714525076093,"temperature":19.21,"humidity":61.24,"humidifier":true,"light":true,"_id":"UejPMdV3URLyTAPH"}
 {"createdAt":1714474772579,"temperature":"21.10","humidity":"51.00","_id":"UfCNCeznmZ8hNGiU"}
 {"createdAt":1714520568970,"temperature":29,"humidity":49,"_id":"UfD7lHW6LBt9Ngh4"}
 {"createdAt":1714521632457,"temperature":6,"humidity":2,"humdifier":false,"light":false,"_id":"UfnczThLyaoKjcug"}
@@ -2642,6 +2660,7 @@
 {"createdAt":1714480497581,"temperature":"21.40","humidity":"53.00","_id":"UrsuUjPSbtZ7bkYk"}
 {"createdAt":1714472411751,"temperature":"21.10","humidity":"49.00","_id":"UspN1mg63azt2FYh"}
 {"createdAt":1714434460557,"temperature":"21.00","humidity":"69.00","_id":"UuUaFKW4e48QPJxa"}
+{"createdAt":1714525336118,"temperature":20.68,"humidity":84.725,"humidifier":false,"light":true,"_id":"UupZ1AFrgyYKOuA7"}
 {"temperature":"21.00","humidity":"69.00","_id":"UvdobO0A0JvYROyD"}
 {"createdAt":1714519818817,"temperature":37,"humidity":46,"_id":"UwBiC1PnErcw0ZOI"}
 {"createdAt":1714482840876,"temperature":"21.70","humidity":"55.00","_id":"UwLIkg6Ax9w27XR6"}
@@ -2788,6 +2807,7 @@
 {"createdAt":1714435294713,"temperature":"22.50","humidity":"99.00","_id":"WkuKOh7cQKdf6NfI"}
 {"createdAt":1714475185279,"temperature":"21.40","humidity":"52.00","_id":"WlarHU5aURcAKAgD"}
 {"temperature":"20.90","humidity":"70.00","_id":"WlbGulcaJ9v6khId"}
+{"createdAt":1714525086095,"temperature":20.76,"humidity":61.53,"humidifier":true,"light":true,"_id":"WnDsAV17TDdIEMMv"}
 {"temperature":"21.00","humidity":"69.00","_id":"WoRLGm5GBd6I3J6Q"}
 {"temperature":"20.70","humidity":"70.00","_id":"WovuinNVO1AkBcf3"}
 {"createdAt":1714520472951,"temperature":35,"humidity":39,"_id":"WozjUIL0lB0X4fkp"}
@@ -2849,6 +2869,7 @@
 {"createdAt":1714484965092,"temperature":"21.40","humidity":"55.00","_id":"XVRLXq2TYUMyQNZ0"}
 {"createdAt":1714475482664,"temperature":"21.50","humidity":"51.00","_id":"XW5beebI5aMcw82X"}
 {"createdAt":1714521311331,"temperature":2,"humidity":9,"humdifier":false,"light":false,"_id":"XWZm1R7oOqzxmEPz"}
+{"createdAt":1714525396125,"temperature":20.25,"humidity":81.235,"humidifier":false,"light":false,"_id":"XWrFCFmrM8nHo1xf"}
 {"createdAt":1714517738141,"temperature":16,"humidity":44,"_id":"XXDitBbEg3GecvPp"}
 {"createdAt":1714435227951,"temperature":"24.20","humidity":"99.00","_id":"XYgKxG2Bk6dL4lHs"}
 {"temperature":"20.80","humidity":"69.00","_id":"XZbWtYSMTX3UrcJ1"}
@@ -2867,6 +2888,7 @@
 {"createdAt":1714484874055,"temperature":"21.40","humidity":"55.00","_id":"XfjMNrcEyNA69dqF"}
 {"createdAt":1714495028739,"temperature":"24.70","humidity":"53.00","_id":"XghTxiM5l8jvNWXJ"}
 {"createdAt":1714509523698,"temperature":"22.80","humidity":"60.00","_id":"XgtNV4PoGTKmv4UZ"}
+{"createdAt":1714525156100,"temperature":20.85,"humidity":71.44999999999999,"humidifier":true,"light":true,"_id":"XiGJUzMn581UOol6"}
 {"createdAt":1714434612287,"temperature":"21.10","humidity":"69.00","_id":"XiTtoDnpA0cvQW7f"}
 {"createdAt":1714483290000,"temperature":"21.60","humidity":"56.00","_id":"XiWtsXAXRBeF0g0C"}
 {"createdAt":1714481128303,"temperature":"21.50","humidity":"55.00","_id":"Xinl2vcS1uSIU4Cq"}
@@ -2954,6 +2976,7 @@
 {"createdAt":1714478493215,"temperature":"21.00","humidity":"51.00","_id":"YfDQQfUqT9T0a38z"}
 {"createdAt":1714510373365,"temperature":"21.00","humidity":"70.00","_id":"YgUVGqAPA2t7bsKW"}
 {"createdAt":1714483217169,"temperature":"21.60","humidity":"56.00","_id":"YhDRnMwb65p0Xnmq"}
+{"createdAt":1714525126098,"temperature":20.12,"humidity":66.96,"humidifier":true,"light":true,"_id":"YiBLrwLnuJD0XG2q"}
 {"createdAt":1714481431763,"temperature":"21.50","humidity":"56.00","_id":"YiGIS6rWjxe7soLW"}
 {"createdAt":1714509948532,"temperature":"20.70","humidity":"64.00","_id":"YiO5pCcEG9u1A3mQ"}
 {"createdAt":1714478875565,"temperature":"20.90","humidity":"52.00","_id":"YjJTJbC2unWeYp4r"}
@@ -3008,6 +3031,7 @@
 {"createdAt":1714479731351,"temperature":"21.30","humidity":"50.00","_id":"ZDGqpm08t8ivQUC8"}
 {"createdAt":1714521377343,"temperature":32,"humidity":38,"humdifier":true,"light":true,"_id":"ZDUU1n3z828sm4U9"}
 {"createdAt":1714518647025,"temperature":40,"humidity":3,"_id":"ZDkVHjJ7aWyquf7R"}
+{"createdAt":1714525416127,"temperature":19.06,"humidity":79.85499999999999,"humidifier":false,"light":false,"_id":"ZEGheTKvcHqy7U4Y"}
 {"createdAt":1714518952393,"temperature":29,"humidity":49,"_id":"ZFcKi4fg5EZvqk7h"}
 {"createdAt":1714435337196,"temperature":"22.20","humidity":"79.00","_id":"ZG8K0lr3YqF7W6vf"}
 {"createdAt":1714519584772,"temperature":15,"humidity":35,"_id":"ZGj7IJtVoTEs7kCD"}
@@ -3163,6 +3187,7 @@
 {"createdAt":1714520634902,"temperature":18,"humidity":39,"humdifier":true,"light":true,"_id":"ayUBm9mImqI8sPel"}
 {"createdAt":1714516657148,"temperature":24,"humidity":32,"_id":"azQ51bm54Du9ZAOa"}
 {"createdAt":1714435018405,"temperature":"21.10","humidity":"69.00","_id":"b08ZOu0uUHd2nYQQ"}
+{"createdAt":1714525476132,"temperature":19.75,"humidity":76.14,"humidifier":false,"light":false,"_id":"b0Ghf4fGzSclTupY"}
 {"createdAt":1714484479582,"temperature":"21.50","humidity":"56.00","_id":"b1HTeuAcTnmanYBE"}
 {"createdAt":1714518416278,"temperature":47,"humidity":26,"_id":"b1arFWVAOiWozlmh"}
 {"createdAt":1714473661959,"temperature":"21.20","humidity":"50.00","_id":"b1g6lS8xEOz6ViVy"}
@@ -3339,6 +3364,7 @@
 {"createdAt":1714472484579,"temperature":"21.20","humidity":"48.00","_id":"d9eltLbTyJs8yHHH"}
 {"temperature":"21.00","humidity":"69.00","_id":"d9eqsrP0C30EIxUP"}
 {"temperature":"21.00","humidity":"69.00","_id":"dArDl4E8R0KlIT3e"}
+{"createdAt":1714525296114,"temperature":19.24,"humidity":85.78999999999998,"humidifier":false,"light":true,"_id":"dBnYs7A0Fh91g5r7"}
 {"createdAt":1714519830817,"temperature":44,"humidity":9,"_id":"dDfu63Nq57XqHKyz"}
 {"createdAt":1714522010055,"temperature":27,"humidity":22,"humdifier":true,"light":true,"_id":"dDoaSeLOZIMSSXFS"}
 {"createdAt":1714521479293,"temperature":38,"humidity":22,"humdifier":false,"light":false,"_id":"dFzoswNb5JG8u4Jv"}
@@ -3420,6 +3446,7 @@
 {"temperature":"20.70","humidity":"70.00","_id":"eGIUwdnRv5F6WRm7"}
 {"temperature":"20.80","humidity":"69.00","_id":"eIe5X326aYnxwLQz"}
 {"createdAt":1714517990186,"temperature":0,"humidity":36,"_id":"eJOAaQreXGUuojZT"}
+{"createdAt":1714525096095,"temperature":20.45,"humidity":63.36,"humidifier":true,"light":true,"_id":"eMB5HUEnI7cc5BXM"}
 {"createdAt":1714471944435,"temperature":"21.10","humidity":"50.00","_id":"eN4WisgGSj6LFvbz"}
 {"createdAt":1714522957744,"temperature":17,"humidity":41,"humdifier":false,"light":false,"_id":"eNhV1CYzafjNWQ3Z"}
 {"createdAt":1714517972182,"temperature":10,"humidity":42,"_id":"eOBOqimkcUepCP5Y"}
@@ -3869,6 +3896,7 @@
 {"createdAt":1714479106190,"temperature":"20.90","humidity":"51.00","_id":"jhjv6oAvTpRQ0nrl"}
 {"createdAt":1714523682075,"temperature":20.09,"humidity":54.72,"humidifier":true,"light":true,"_id":"jisyIKYHI7FAf1Uc"}
 {"createdAt":1714474013956,"temperature":"21.20","humidity":"49.00","_id":"jjO3PxNlvszjOcc5"}
+{"createdAt":1714525136098,"temperature":20.17,"humidity":68.69,"humidifier":true,"light":true,"_id":"jjx0LJhP1EJdVr0o"}
 {"temperature":"20.90","humidity":"69.00","_id":"jkRPEEmzs0UGpAkz"}
 {"createdAt":1714437172530,"temperature":"21.90","humidity":"69.00","_id":"jkU0OEwXiokI4hNA"}
 {"createdAt":1714516843171,"temperature":1,"humidity":28,"_id":"jkXHoPVgMTxCOEMU"}
@@ -3878,6 +3906,7 @@
 {"createdAt":1714521980049,"temperature":14,"humidity":3,"humdifier":false,"light":false,"_id":"jnrIACX6uyMmZaSH"}
 {"createdAt":1714483781610,"temperature":"21.70","humidity":"55.00","_id":"joOxzUJUs42IIPOC"}
 {"createdAt":1714516891178,"temperature":8,"humidity":4,"_id":"joSdavNYzPM0cTPE"}
+{"createdAt":1714525166101,"temperature":20.42,"humidity":72.60999999999999,"humidifier":true,"light":true,"_id":"joyonEHlgCxqYD9p"}
 {"createdAt":1714517095212,"temperature":41,"humidity":36,"_id":"jpXnfcx5MHxNbatR"}
 {"createdAt":1714479288298,"temperature":"20.90","humidity":"50.00","_id":"jq3C4ozURqot2GmM"}
 {"createdAt":1714481632030,"temperature":"21.50","humidity":"56.00","_id":"jqXcSlZvmxCB0hMH"}
@@ -3914,6 +3943,7 @@
 {"createdAt":1714522855724,"temperature":47,"humidity":39,"humdifier":true,"light":true,"_id":"kES5NKpD9IP59J2C"}
 {"createdAt":1714522280776,"temperature":5,"humidity":40,"humdifier":false,"light":false,"_id":"kEyMe6qWWgLP4MVS"}
 {"createdAt":1714520562969,"temperature":34,"humidity":32,"_id":"kF8seA6vUHbMFFSy"}
+{"createdAt":1714525286112,"temperature":19.62,"humidity":86.21999999999998,"humidifier":true,"light":true,"_id":"kFpwUeXYP0mhsX07"}
 {"createdAt":1714495234890,"temperature":"24.80","humidity":"53.00","_id":"kFstUSFixiDyXjgf"}
 {"createdAt":1714477218702,"temperature":"21.10","humidity":"51.00","_id":"kFwCRUVscqZqbHUD"}
 {"createdAt":1714522582745,"temperature":19,"humidity":13,"humdifier":false,"light":false,"_id":"kH5Mb6DzI93mUJD1"}
@@ -4037,6 +4067,7 @@
 {"createdAt":1714474117129,"temperature":"21.10","humidity":"51.00","_id":"leNX6NB0JEKQ3vR2"}
 {"createdAt":1714508874318,"temperature":"20.90","humidity":"64.00","_id":"lemWjGWYi2sMSzfr"}
 {"temperature":"21.00","humidity":"69.00","_id":"len1axbzsw1VXuvb"}
+{"createdAt":1714525276111,"temperature":19.05,"humidity":84.37999999999998,"humidifier":true,"light":true,"_id":"lgc87XLzrmpQfj6H"}
 {"createdAt":1714520574971,"temperature":37,"humidity":25,"_id":"lh8t3zDiC9q6Iwom"}
 {"createdAt":1714523752084,"temperature":19.4,"humidity":51.04,"humidifier":false,"light":false,"_id":"li6tnopAa3pZp7lB"}
 {"createdAt":1714480235094,"temperature":"21.40","humidity":"52.00","_id":"liE3K1K3KfVoGOus"}
@@ -4113,6 +4144,7 @@
 {"createdAt":1714517606118,"temperature":35,"humidity":16,"_id":"mVtLx7mQhzICB9Mj"}
 {"createdAt":1714436806983,"temperature":"22.20","humidity":"81.00","_id":"mVv3Cz13JAlwUwwN"}
 {"createdAt":1714480180471,"temperature":"21.40","humidity":"53.00","_id":"mXozsAIKnL5QVmUl"}
+{"createdAt":1714525316116,"temperature":20.06,"humidity":85.08999999999999,"humidifier":false,"light":true,"_id":"mXudPSy9GNDuriD4"}
 {"createdAt":1714484692005,"temperature":"21.50","humidity":"55.00","_id":"mY4rvKPrvuQgVFbE"}
 {"createdAt":1714479191158,"temperature":"20.90","humidity":"50.00","_id":"mYw6LYRKLt6cAhBy"}
 {"createdAt":1714522498728,"temperature":11,"humidity":32,"humdifier":false,"light":false,"_id":"maPiVacFZ4OszP11"}
@@ -4212,6 +4244,7 @@
 {"createdAt":1714518683031,"temperature":29,"humidity":18,"_id":"nlTrmBEWg3UwEwcg"}
 {"temperature":"20.50","humidity":"70.00","_id":"nmvoaYUX6DQJvAYy"}
 {"createdAt":1714508922869,"temperature":"20.80","humidity":"64.00","_id":"nnWZmkIgm11tLF3t"}
+{"createdAt":1714525246107,"temperature":20.21,"humidity":81.21999999999998,"humidifier":true,"light":true,"_id":"nnbSh2gyPZRrD6qn"}
 {"createdAt":1714519620777,"temperature":0,"humidity":38,"_id":"nnkRO40dYCiZSGbd"}
 {"createdAt":1714473819747,"temperature":"21.30","humidity":"50.00","_id":"noDRnjhUaZTkYM0o"}
 {"createdAt":1714479846665,"temperature":"21.30","humidity":"50.00","_id":"nqKgm5JISZbMAzDa"}
@@ -4413,6 +4446,7 @@
 {"createdAt":1714479415757,"temperature":"21.00","humidity":"52.00","_id":"qIZDvAjjfgm9SirF"}
 {"createdAt":1714481334656,"temperature":"21.50","humidity":"55.00","_id":"qJ0VHI8pfNR2zn6Q"}
 {"createdAt":1714475682944,"temperature":"21.50","humidity":"53.00","_id":"qJ6KbamHU1sMzDfA"}
+{"createdAt":1714525466132,"temperature":20.62,"humidity":76.66,"humidifier":false,"light":false,"_id":"qKuRARaBmKnqfvFo"}
 {"createdAt":1714479452171,"temperature":"21.00","humidity":"52.00","_id":"qMD9eKpkVC3FOi7s"}
 {"createdAt":1714480192609,"temperature":"21.40","humidity":"53.00","_id":"qNMRD8aI78dzaA9Y"}
 {"createdAt":1714518898386,"temperature":47,"humidity":16,"_id":"qNVBf65sxHOxAAFO"}
@@ -4557,6 +4591,7 @@
 {"createdAt":1714519854823,"temperature":1,"humidity":0,"_id":"s7YWd2LEJ5m7ERXz"}
 {"createdAt":1714472199334,"temperature":"21.10","humidity":"49.00","_id":"s80Mf5C8mOpW7Ods"}
 {"createdAt":1714484418890,"temperature":"21.50","humidity":"56.00","_id":"s9gK9TZ4t4V1K6Ca"}
+{"createdAt":1714525376122,"temperature":20.22,"humidity":82.33,"humidifier":false,"light":false,"_id":"sASscb3fxRMcNZf2"}
 {"createdAt":1714476010672,"temperature":"21.50","humidity":"53.00","_id":"sAs72a98aG7G9efz"}
 {"createdAt":1714435520882,"temperature":"22.10","humidity":"69.00","_id":"sBXBlDIAaB7gabQj"}
 {"createdAt":1714435191536,"temperature":"21.10","humidity":"69.00","_id":"sBZzlIjsHHUIgW7r"}
@@ -4599,9 +4634,11 @@
 {"createdAt":1714509845359,"temperature":"20.80","humidity":"64.00","_id":"sZuI5tJR3tNIQqsn"}
 {"createdAt":1714437001195,"temperature":"21.90","humidity":"70.00","_id":"saaf5oeFzUMbra04"}
 {"createdAt":1714509942463,"temperature":"20.70","humidity":"64.00","_id":"sbgpgEctF0v6F5g5"}
+{"createdAt":1714525346120,"temperature":20.29,"humidity":84.21499999999999,"humidifier":false,"light":true,"_id":"sd6XBbjQX8I9DFIH"}
 {"createdAt":1714477862029,"temperature":"21.10","humidity":"51.00","_id":"sdSKJ70KQ9CMORl2"}
 {"createdAt":1714524935517,"temperature":19.8,"humidity":55.97000000000001,"humidifier":true,"light":false,"_id":"seNgoEx7srv4Sz9V"}
 {"createdAt":1714472709128,"temperature":"21.80","humidity":"47.00","_id":"seS9TP9WKzThD4sB"}
+{"createdAt":1714525116097,"temperature":20.9,"humidity":65.36,"humidifier":true,"light":true,"_id":"seVcou968RHmZ4j6"}
 {"createdAt":1714517216030,"temperature":45,"humidity":4,"_id":"sfcZSVEAr00cCvRx"}
 {"createdAt":1714519350708,"temperature":34,"humidity":48,"_id":"sgl9Z0AXLEDfDxtS"}
 {"createdAt":1714509293075,"temperature":"20.60","humidity":"64.00","_id":"siSRTQrHqlP1Dg8n"}
@@ -4626,6 +4663,7 @@
 {"createdAt":1714471574225,"temperature":"21.10","humidity":"50.00","_id":"sr6fJ9hWzvPeJWbt"}
 {"createdAt":1714437475312,"temperature":"22.30","humidity":"99.00","_id":"ssbfkEaVH9rxKdJ6"}
 {"createdAt":1714434745296,"temperature":"21.10","humidity":"69.00","_id":"ssgs1y40oE8vqQIy"}
+{"createdAt":1714525446129,"temperature":20.7,"humidity":77.27,"humidifier":false,"light":false,"_id":"suEQq4jTAPG3hlOl"}
 {"createdAt":1714508394862,"temperature":"21.50","humidity":"62.00","_id":"suQsgDUFeaFjnsGy"}
 {"createdAt":1714477255124,"temperature":"21.10","humidity":"52.00","_id":"svIAIae9jkUc7zew"}
 {"createdAt":1714474711890,"temperature":"21.10","humidity":"52.00","_id":"swxKZaigvDlj2kXl"}
@@ -4838,6 +4876,7 @@
 {"createdAt":1714471009781,"temperature":"20.70","humidity":"53.00","_id":"vnSLu89HZStyBZ6s"}
 {"createdAt":1714477455403,"temperature":"21.10","humidity":"53.00","_id":"voAl8HfOiwvBQP4N"}
 {"createdAt":1714478122998,"temperature":"21.10","humidity":"52.00","_id":"voZEKwZr1ank2IkP"}
+{"createdAt":1714525326118,"temperature":20.3,"humidity":85.08999999999999,"humidifier":false,"light":true,"_id":"vrBnLUHXqAZDWeqF"}
 {"createdAt":1714478232247,"temperature":"21.10","humidity":"52.00","_id":"vsYH8YePWyigBbxO"}
 {"createdAt":1714474056439,"temperature":"21.10","humidity":"50.00","_id":"vtglKquNOEVll9iM"}
 {"temperature":"20.50","humidity":"70.00","_id":"vveRB6RTXaN1OYMo"}
@@ -4943,6 +4982,7 @@
 {"temperature":"20.90","humidity":"69.00","_id":"x8r0IFbQHSWCGEc8"}
 {"createdAt":1714436782706,"temperature":"22.30","humidity":"99.00","_id":"x9NeSBkqmN9Pot7H"}
 {"createdAt":1714472241818,"temperature":"21.10","humidity":"48.00","_id":"x9dnbfpzDR61hhGi"}
+{"createdAt":1714525266110,"temperature":20.97,"humidity":83.23999999999998,"humidifier":true,"light":true,"_id":"x9j3QCZnfQi3Bkbk"}
 {"createdAt":1714509669358,"temperature":"21.10","humidity":"63.00","_id":"x9uylZw1hDWWXerW"}
 {"createdAt":1714472357130,"temperature":"21.10","humidity":"49.00","_id":"xC7JhvwlSC38Lp5w"}
 {"createdAt":1714475707221,"temperature":"21.50","humidity":"52.00","_id":"xCDNKtPQZaYpIY0H"}
@@ -4993,6 +5033,7 @@
 {"createdAt":1714509906049,"temperature":"20.70","humidity":"64.00","_id":"xlEppggaU41IXni7"}
 {"createdAt":1714476107776,"temperature":"21.50","humidity":"52.00","_id":"xlIWZQ0aMJ0NlDVj"}
 {"temperature":"20.50","humidity":"70.00","_id":"xmW2tJAvQ8IudFjA"}
+{"createdAt":1714525366122,"temperature":20.5,"humidity":82.74,"humidifier":false,"light":false,"_id":"xnbulSWgvlZ9lJqf"}
 {"createdAt":1714473977542,"temperature":"21.20","humidity":"49.00","_id":"xo1xWe3eQOzn1LhE"}
 {"createdAt":1714521679999,"temperature":36,"humidity":19,"humdifier":false,"light":false,"_id":"xoHimmjtCeupQL8J"}
 {"createdAt":1714436606702,"temperature":"21.90","humidity":"68.00","_id":"xodgOyY8VbfzT1v8"}
@@ -5105,6 +5146,7 @@
 {"createdAt":1714519644782,"temperature":17,"humidity":42,"_id":"z21MQddUkVI4mVN6"}
 {"createdAt":1714483277861,"temperature":"21.60","humidity":"56.00","_id":"z2CyIXLxZELm4Myh"}
 {"createdAt":1714518587015,"temperature":33,"humidity":11,"_id":"z2QwfdE9Wn1Wg337"}
+{"createdAt":1714525436129,"temperature":19.39,"humidity":78.11,"humidifier":false,"light":false,"_id":"z4b6eHL2OnF1B7Kg"}
 {"createdAt":1714472678783,"temperature":"21.70","humidity":"47.00","_id":"z4rUkiwSPBZUrcmV"}
 {"createdAt":1714470730606,"temperature":"20.50","humidity":"52.00","_id":"z5Ro6IxHgPoiALCD"}
 {"createdAt":1714481504579,"temperature":"21.50","humidity":"56.00","_id":"z5jLRPvzxfb1ke7W"}
@@ -5166,6 +5208,7 @@
 {"createdAt":1714523822090,"temperature":20.03,"humidity":53.26,"humidifier":true,"light":true,"_id":"zmTIXIHTHtRxDEiS"}
 {"createdAt":1714472308577,"temperature":"21.10","humidity":"49.00","_id":"zmXZUH2vGs6S3bFd"}
 {"createdAt":1714482986538,"temperature":"21.60","humidity":"56.00","_id":"znaDyhuOUkmJvNEo"}
+{"createdAt":1714525186103,"temperature":20.99,"humidity":76.08999999999999,"humidifier":true,"light":true,"_id":"zrBZ6u17Fjzh3sCS"}
 {"createdAt":1714495349487,"temperature":"24.70","humidity":"54.00","_id":"zssZsEAymxU8wr8L"}
 {"createdAt":1714435654412,"temperature":"21.90","humidity":"69.00","_id":"ztGmP06qFzWnfJcf"}
 {"createdAt":1714516951189,"temperature":4,"humidity":47,"_id":"ztH3KQJGODjrnwfr"}
@@ -5176,46 +5219,3 @@
 {"createdAt":1714475458389,"temperature":"21.50","humidity":"50.00","_id":"zwQctxMIShxEsLGK"}
 {"createdAt":1714470706331,"temperature":"20.50","humidity":"51.00","_id":"zwcpqS5jR7E8PPnJ"}
 {"createdAt":1714518695033,"temperature":31,"humidity":9,"_id":"zyYdQR3yxqmy2pXi"}
-{"createdAt":1714525056092,"temperature":19.14,"humidity":61.1,"humidifier":true,"light":true,"_id":"8WSy40zIe6wF8PUJ"}
-{"createdAt":1714525066093,"temperature":19.37,"humidity":61.120000000000005,"humidifier":true,"light":true,"_id":"FbcOXYClN0t7xIGu"}
-{"createdAt":1714525076093,"temperature":19.21,"humidity":61.24,"humidifier":true,"light":true,"_id":"UejPMdV3URLyTAPH"}
-{"createdAt":1714525086095,"temperature":20.76,"humidity":61.53,"humidifier":true,"light":true,"_id":"WnDsAV17TDdIEMMv"}
-{"createdAt":1714525096095,"temperature":20.45,"humidity":63.36,"humidifier":true,"light":true,"_id":"eMB5HUEnI7cc5BXM"}
-{"createdAt":1714525106095,"temperature":20.5,"humidity":65.17999999999999,"humidifier":true,"light":true,"_id":"EgAnMTlf4fdhldgG"}
-{"createdAt":1714525116097,"temperature":20.9,"humidity":65.36,"humidifier":true,"light":true,"_id":"seVcou968RHmZ4j6"}
-{"createdAt":1714525126098,"temperature":20.12,"humidity":66.96,"humidifier":true,"light":true,"_id":"YiBLrwLnuJD0XG2q"}
-{"createdAt":1714525136098,"temperature":20.17,"humidity":68.69,"humidifier":true,"light":true,"_id":"jjx0LJhP1EJdVr0o"}
-{"createdAt":1714525146099,"temperature":20.15,"humidity":69.85,"humidifier":true,"light":true,"_id":"0aSILNQdSCtIhROj"}
-{"createdAt":1714525156100,"temperature":20.85,"humidity":71.44999999999999,"humidifier":true,"light":true,"_id":"XiGJUzMn581UOol6"}
-{"createdAt":1714525166101,"temperature":20.42,"humidity":72.60999999999999,"humidifier":true,"light":true,"_id":"joyonEHlgCxqYD9p"}
-{"createdAt":1714525176102,"temperature":19.58,"humidity":74.50999999999999,"humidifier":true,"light":true,"_id":"8aTINJWJctU46xGf"}
-{"createdAt":1714525186103,"temperature":20.99,"humidity":76.08999999999999,"humidifier":true,"light":true,"_id":"zrBZ6u17Fjzh3sCS"}
-{"createdAt":1714525196103,"temperature":20.02,"humidity":77.99999999999999,"humidifier":true,"light":true,"_id":"Syduqk7KJgAHS8ME"}
-{"createdAt":1714525206104,"temperature":20.11,"humidity":78.34999999999998,"humidifier":true,"light":true,"_id":"QczeYoWHVNUkMhe3"}
-{"createdAt":1714525216105,"temperature":20.72,"humidity":78.35999999999999,"humidifier":true,"light":true,"_id":"MR6wbsEni9gtMZDJ"}
-{"createdAt":1714525226106,"temperature":19.45,"humidity":78.67999999999998,"humidifier":true,"light":true,"_id":"3yovIov0Mtimudcc"}
-{"createdAt":1714525236106,"temperature":19.27,"humidity":80.53999999999998,"humidifier":true,"light":true,"_id":"TSEL68efuM8366Va"}
-{"createdAt":1714525246107,"temperature":20.21,"humidity":81.21999999999998,"humidifier":true,"light":true,"_id":"nnbSh2gyPZRrD6qn"}
-{"createdAt":1714525256108,"temperature":19.38,"humidity":81.67999999999998,"humidifier":true,"light":true,"_id":"3DlzfSHmaYxe8Jns"}
-{"createdAt":1714525266110,"temperature":20.97,"humidity":83.23999999999998,"humidifier":true,"light":true,"_id":"x9j3QCZnfQi3Bkbk"}
-{"createdAt":1714525276111,"temperature":19.05,"humidity":84.37999999999998,"humidifier":true,"light":true,"_id":"lgc87XLzrmpQfj6H"}
-{"createdAt":1714525286112,"temperature":19.62,"humidity":86.21999999999998,"humidifier":true,"light":true,"_id":"kFpwUeXYP0mhsX07"}
-{"createdAt":1714525296114,"temperature":19.24,"humidity":85.78999999999998,"humidifier":false,"light":true,"_id":"dBnYs7A0Fh91g5r7"}
-{"createdAt":1714525306115,"temperature":20.9,"humidity":85.43999999999998,"humidifier":false,"light":true,"_id":"7uwQKVY1rwiUd6b0"}
-{"createdAt":1714525316116,"temperature":20.06,"humidity":85.08999999999999,"humidifier":false,"light":true,"_id":"mXudPSy9GNDuriD4"}
-{"createdAt":1714525326118,"temperature":20.3,"humidity":85.08999999999999,"humidifier":false,"light":true,"_id":"vrBnLUHXqAZDWeqF"}
-{"createdAt":1714525336118,"temperature":20.68,"humidity":84.725,"humidifier":false,"light":true,"_id":"UupZ1AFrgyYKOuA7"}
-{"createdAt":1714525346120,"temperature":20.29,"humidity":84.21499999999999,"humidifier":false,"light":true,"_id":"sd6XBbjQX8I9DFIH"}
-{"createdAt":1714525356121,"temperature":19.85,"humidity":83.27,"humidifier":false,"light":true,"_id":"9C4nHvuUJCkm181Y"}
-{"createdAt":1714525366122,"temperature":20.5,"humidity":82.74,"humidifier":false,"light":false,"_id":"xnbulSWgvlZ9lJqf"}
-{"createdAt":1714525376122,"temperature":20.22,"humidity":82.33,"humidifier":false,"light":false,"_id":"sASscb3fxRMcNZf2"}
-{"createdAt":1714525386124,"temperature":20.02,"humidity":81.85,"humidifier":false,"light":false,"_id":"T3KhwaMobWiOWCJO"}
-{"createdAt":1714525396125,"temperature":20.25,"humidity":81.235,"humidifier":false,"light":false,"_id":"XWrFCFmrM8nHo1xf"}
-{"createdAt":1714525406126,"temperature":20.05,"humidity":80.46,"humidifier":false,"light":false,"_id":"Hz3ZSfPq5wOoIRbC"}
-{"createdAt":1714525416127,"temperature":19.06,"humidity":79.85499999999999,"humidifier":false,"light":false,"_id":"ZEGheTKvcHqy7U4Y"}
-{"createdAt":1714525426128,"temperature":20.04,"humidity":78.99,"humidifier":false,"light":false,"_id":"I46waQUNyLxXUlRN"}
-{"createdAt":1714525436129,"temperature":19.39,"humidity":78.11,"humidifier":false,"light":false,"_id":"z4b6eHL2OnF1B7Kg"}
-{"createdAt":1714525446129,"temperature":20.7,"humidity":77.27,"humidifier":false,"light":false,"_id":"suEQq4jTAPG3hlOl"}
-{"createdAt":1714525456130,"temperature":20.54,"humidity":77.035,"humidifier":false,"light":false,"_id":"GH3PCOLq8vtWa1RP"}
-{"createdAt":1714525466132,"temperature":20.62,"humidity":76.66,"humidifier":false,"light":false,"_id":"qKuRARaBmKnqfvFo"}
-{"createdAt":1714525476132,"temperature":19.75,"humidity":76.14,"humidifier":false,"light":false,"_id":"b0Ghf4fGzSclTupY"}

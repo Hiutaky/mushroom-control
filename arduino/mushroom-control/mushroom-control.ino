@@ -1,4 +1,13 @@
 #include "DHT.h" //by adafruit (download entire library)
+#include "Adafruit_SGP40.h"
+#include "Adafruit_SHT4x.h"
+
+// to-do: add support for sht40 sensor
+// inside sht40
+// outside dht11
+
+Adafruit_SGP40 sgp;
+Adafruit_SHT4x sht4;
 
 #define UPDATE_INTERVAL 10000
 
@@ -18,7 +27,7 @@
 #define HUM_ON_THRESOLD 75
 #define HUM_OFF_THRESOLD 90
 
-DHT dht_in(DHT_P, DHTTYPE);
+// DHT dht_in(DHT_P, DHTTYPE);
 DHT dht_out(DHT_OUT_P, DHTTYPE);
 
 uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
@@ -39,13 +48,30 @@ void setup() {
   initRele(FAN_P);
   initRele(HUM_P);
   Serial.begin(9600);
-  dht_in.begin();
+
+  //set sht4 precision to med and enable heater for self-decontamination
+  sht4.setPrecision(SHT4X_MED_PRECISION);
+  // sht4.setHeater(SHT4X_MED_HEATER_100MS);  
+  sht4.setHeater(SHT4X_NO_HEATER);
+
+
+  if( ! sht4.begin() )
+    Serial.println("Unable to find SHT4 sensor");
+
+  // dht_in.begin();
   dht_out.begin();
 }
 
 void loop() {
-  float h = dht_in.readHumidity();
-  float t = dht_in.readTemperature();
+  /**
+    Legacy DHT11 in temperature
+   */
+  // float h = dht_in.readHumidity();
+  // float t = dht_in.readTemperature();
+  sensors_event_t humidity, temp;
+  sht4.getEvent(&humidity, &temp);
+  float h = humidity.relative_humidity;
+  float t = temp.temperature;
 
   float h_out = dht_out.readHumidity();
   float t_out = dht_out.readTemperature();

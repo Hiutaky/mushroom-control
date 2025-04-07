@@ -21,7 +21,7 @@ export const getArduino = () => {
       'OFF_FAN',
       'ON_HUM',
       'OFF_HUM'
-    ]
+    ];
     names.map( (n) => 
       actions[n] = () => port.write(n)
     )
