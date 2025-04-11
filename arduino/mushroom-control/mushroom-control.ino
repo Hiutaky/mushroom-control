@@ -1,5 +1,8 @@
 #include "DHT.h" //by adafruit (download entire library)
 #include "Adafruit_SHT4x.h"
+#include <Wire.h>
+#include <SensirionI2cScd4x.h>
+
 
 Adafruit_SHT4x sht4 = Adafruit_SHT4x();
 
@@ -8,6 +11,10 @@ Adafruit_SHT4x sht4 = Adafruit_SHT4x();
 //temperature pin, type dht11
 #define DHT_P 8
 #define DHT_OUT_P 2
+
+// interfaccia i2c
+SensirionI2cScd4x scd40;
+
 
 //relé module
 #define LED_P A1//12v, 0.5ah - 6w
@@ -55,6 +62,10 @@ void setup() {
 //  sht4.setHeater(SHT4X_MED_HEATER_1S);  
   sht4.setHeater(SHT4X_NO_HEATER);
 
+  Wire.begin();
+  scd40.begin(Wire, 0x62);
+  scd40.startPeriodicMeasurement();
+
   dht_in.begin();
   dht_out.begin();
 }
@@ -65,6 +76,16 @@ void loop() {
   
   sht4.getEvent(&humidity, &temp);
 
+  //co2 sensor scd40
+  float co2_temp, co2_hum;
+  uint16_t co2;
+  bool co2ready = false;
+  scd40.getDataReadyStatus(co2ready);
+
+  if (co2ready) {
+    scd40.readMeasurement(co2, co2_temp, co2_hum);
+  }
+
   float h_out = dht_out.readHumidity();
   float t_out = dht_out.readTemperature();
   checkHumidifier(humidity.relative_humidity);
@@ -72,7 +93,7 @@ void loop() {
   checkIOFan();
 
   readSerial();
-  writeSerial(humidity.relative_humidity, temp.temperature, h_out, t_out);
+  writeSerial(humidity.relative_humidity, temp.temperature, h_out, t_out, co2, co2_temp, co2_hum);
   
   delay(UPDATE_INTERVAL);
 }
@@ -83,7 +104,7 @@ void initRele(int pin) {
   digitalWrite(pin, HIGH);
 }
 
-void writeSerial(float h, float t,float h_out, float t_out) {
+void writeSerial(float h, float t,float h_out, float t_out, uint16_t co2, float co2_temp, float co2_hum) {
   String payload = 
     "temperature:" + String(t) +
     ",temperatureOut:" + String(t_out) +
@@ -93,7 +114,10 @@ void writeSerial(float h, float t,float h_out, float t_out) {
     ",fan:" + String(humActive || manualFan) +
     ",led:" + String(ledActive || manualLed) +
     ",ledTimer:"+ String(ledTimer) +
-    ",ioFan:" + String(ioFanActive || manualIOFan);
+    ",ioFan:" + String(ioFanActive || manualIOFan) +
+    ",co2:" + String(co2) +
+    ",co2Temp:" + String(co2_temp) +
+    ",co2Hum:" + String(co2_hum);
   Serial.println(payload);
 }
 
