@@ -44,8 +44,8 @@ function App() {
                 />
                 <Sensor 
                   label={'Fan'}
-                  active={last?.humidifier > 0 || last?.fan > 0}
-                  onClick={ () => last?.humidifier == 0 && last.fan == 0 ? actions.ON_FAN() : actions.OFF_FAN()  }
+                  active={last?.ioFan > 0 || last?.ioFan > 0}
+                  onClick={ () => last?.ioFan == 0 ? actions.ON_IO_FAN() : actions.OFF_IO_FAN()  }
                   icon={icons.Fan}
                 />
                 <Sensor 

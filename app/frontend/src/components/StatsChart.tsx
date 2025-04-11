@@ -122,6 +122,13 @@ const StatsChart = () => {
                 borderColor: 'black',
                 yAxisID: 'y3',
                 pointStyle: false,
+            },{
+                label: `IO Fan`,
+                data: stats.map( s => s.ioFan ),
+                backgroundColor: 'blue',
+                borderColor: 'blue',
+                yAxisID: 'y3',
+                pointStyle: false,
             }]
         }
     }, [_stats])

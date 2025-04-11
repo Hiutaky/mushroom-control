@@ -1,6 +1,9 @@
 #include "DHT.h" //by adafruit (download entire library)
+#include "Adafruit_SHT4x.h"
 
-#define UPDATE_INTERVAL 10000
+Adafruit_SHT4x sht4 = Adafruit_SHT4x();
+
+#define UPDATE_INTERVAL 1000
 
 //temperature pin, type dht11
 #define DHT_P 8
@@ -10,13 +13,14 @@
 #define LED_P A1//12v, 0.5ah - 6w
 #define FAN_P A2//12v, 0.5ah - 6w
 #define HUM_P A3//24v, 0.8ah - 20w
+#define INOUTFAN_P A4
 //total consume = 32w/a
 
 #define DHTTYPE DHT11
 
 //humidifier settings
-#define HUM_ON_THRESOLD 75
-#define HUM_OFF_THRESOLD 90
+#define HUM_ON_THRESOLD 84
+#define HUM_OFF_THRESOLD 94
 
 DHT dht_in(DHT_P, DHTTYPE);
 DHT dht_out(DHT_OUT_P, DHTTYPE);
@@ -27,33 +31,48 @@ uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
 bool manualHum = false;
 bool manualFan = false;
 bool manualLed = false;
+bool manualIOFan = false;
 
 //automatic controls
 bool ledActive = false;
 bool humActive = false;
+bool ioFanActive = false;
 
 float ledTimer = 0;
+float ioFanTimer = 0;
 
 void setup() {
   initRele(LED_P);
   initRele(FAN_P);
   initRele(HUM_P);
+  initRele(INOUTFAN_P);
   Serial.begin(9600);
+   if (! sht4.begin()) {
+    Serial.println("Couldn't find SHT4x");
+    while (1) delay(1);
+  }
+  sht4.setPrecision(SHT4X_MED_PRECISION);
+//  sht4.setHeater(SHT4X_MED_HEATER_1S);  
+  sht4.setHeater(SHT4X_NO_HEATER);
+
   dht_in.begin();
   dht_out.begin();
 }
 
 void loop() {
-  float h = dht_in.readHumidity();
-  float t = dht_in.readTemperature();
+  
+  sensors_event_t humidity, temp;
+  
+  sht4.getEvent(&humidity, &temp);
 
   float h_out = dht_out.readHumidity();
   float t_out = dht_out.readTemperature();
-  checkHumidifier(h);
+  checkHumidifier(humidity.relative_humidity);
   checkLed();
+  checkIOFan();
 
   readSerial();
-  writeSerial(h, t, h_out, t_out);
+  writeSerial(humidity.relative_humidity, temp.temperature, h_out, t_out);
   
   delay(UPDATE_INTERVAL);
 }
@@ -73,7 +92,8 @@ void writeSerial(float h, float t,float h_out, float t_out) {
     ",humidifier:" + String(humActive || manualHum) +
     ",fan:" + String(humActive || manualFan) +
     ",led:" + String(ledActive || manualLed) +
-    ",ledTimer:"+ String(ledTimer);
+    ",ledTimer:"+ String(ledTimer) +
+    ",ioFan:" + String(ioFanActive || manualIOFan);
   Serial.println(payload);
 }
 
@@ -93,6 +113,10 @@ void readSerial() {
       on_hum();
     if( command == "OFF_HUM" ) 
       off_hum();
+    if( command == "ON_IO_FAN" ) 
+      on_inoutfan();
+    if( command == "OFF_IO_FAN" ) 
+      off_inoutfan();
   }
 }
 
@@ -130,6 +154,18 @@ void off_hum() {
   digitalWrite(HUM_P, HIGH); 
 }
 
+
+void on_inoutfan() {
+  if( ! manualIOFan )
+    manualIOFan = true;
+  digitalWrite(INOUTFAN_P, LOW); 
+}
+void off_inoutfan() {
+  if( manualIOFan )
+    manualIOFan = false;
+  digitalWrite(INOUTFAN_P, HIGH); 
+}
+
 //automated actions
 void checkHumidifier(float humidity) {
   //if manual control over LED then skip
@@ -148,7 +184,26 @@ void checkHumidifier(float humidity) {
     }
   }
 }
+void checkIOFan() {
+  //5min on - 55 min off
+  //if manualLed is on (you tanking over of controls) then skip
+  if( ! manualIOFan ) {
+    if( !ioFanActive && ioFanTimer == 0  ) {
+        digitalWrite(INOUTFAN_P, LOW);
+        ioFanActive = true;
+    }
+    if( ioFanActive && ioFanTimer >= 300 ) {
+      digitalWrite(INOUTFAN_P, HIGH);
+      ioFanActive = false;
+//      ioFanTimer = 0;
+    }
+    ioFanTimer += UPDATE_INTERVAL / 1000;//in seconds
 
+    if( ioFanTimer >= 1800 ) 
+      ioFanTimer = 0;
+    
+  }
+}
 void checkLed() {
   //12 hours on - 12 hours off
   //if manualLed is on (you tanking over of controls) then skip

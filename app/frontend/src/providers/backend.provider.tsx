@@ -11,6 +11,7 @@ export type Stat = {
   humidityOut?: number;
   humidifier: boolean;
   led: boolean;
+  ioFan: boolean
 }
 
 type BackendState = {
@@ -52,7 +53,9 @@ export const useBackendProvider = () => {
     'ON_FAN',
     'OFF_FAN',
     'ON_HUM',
-    'OFF_HUM'
+    'OFF_HUM',
+    'ON_IO_FAN',
+    'OFF_IO_FAN'
   ];
   const actions = {} 
   _actions.map( (a) => 
@@ -63,7 +66,7 @@ export const useBackendProvider = () => {
     fetchBackend();
     const interval = setInterval( () => {
       fetchBackend();
-    }, 30000)
+    }, 5000)
     return () => clearInterval(interval)
   }, []);
 
