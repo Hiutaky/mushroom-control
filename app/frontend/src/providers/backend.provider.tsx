@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import Config from '../config';
+import Config, { getHost } from '../config';
 
-const backend = 'http://'+Config.host+'3001/'
+const backend = getHost()
 
 export type Stat = {
   createdAt: number;

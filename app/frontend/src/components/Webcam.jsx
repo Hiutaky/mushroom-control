@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react"
 import Button from "./Button"
-import Config from "../config"
+import Config, { getWsHost } from "../config"
 
 const Webcam = () => {
     const [base64Frame, setFrame] = useState('')
     const [ready, setReady] = useState(false)
-    const ws = useMemo( ( )=> new WebSocket(`ws://${Config.host}3002`), [])
+    const ws = useMemo( ( )=> new WebSocket(getWsHost()), [])
 
     const fetchWebcam = () => {
         ws.onopen = () => {
@@ -41,7 +41,7 @@ const Webcam = () => {
                     </Button>
                 </div>
             </div>
-            <img className=" aspect-video bg-slate-600 rounded-lg " src={base64Frame} />
+            <img className=" rotate-180 aspect-video bg-slate-600 rounded-lg " src={base64Frame} />
         </div>
     )
 }

@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "node ./scripts/dev.js",
     "list": "node ./app/list.js",
     "frontend": "cd app/frontend & npm run --cwd ./app/frontend start",
     "start": "nodemon ./app/backend/index.js",
