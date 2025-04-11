@@ -34,7 +34,7 @@ function App() {
           <div className='grid md:grid-cols-[30%_1fr] lg:grid-cols-[20%_1fr] gap-3'>
             <Box direction='col'>
               <span className='font-bold text-sm'>Controllers</span>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <Sensor 
                   label={'Light'}
                   active={last.led}
@@ -42,7 +42,13 @@ function App() {
                   onClick={ () => sendAction( last.led ? "OFF_LED" : "ON_LED") }
                 />
                 <Sensor 
-                  label={'Fan'}
+                  label={'IO Fan'}
+                  active={ last?.ioFan }
+                  onClick={ () => sendAction( last.ioFan ? "OFF_IO_FAN" : "ON_IO_FAN"  )  }
+                  icon={icons.Fan}
+                />
+                <Sensor 
+                  label={'Mist Fan'}
                   active={last?.humidifier || last?.fan }
                   onClick={ () => sendAction( last.humidifier && last.fan ? "OFF_FAN" : "ON_FAN"  )  }
                   icon={icons.Fan}
@@ -60,7 +66,15 @@ function App() {
                   label='Temp. (C)'
                   color="bg-red-500"
                   unit='°'
-                  value={ last?.temperature }
+                  values={ [{
+                    color: 'bg-red-500',
+                    label: 'In',
+                    value: last.temperature
+                  }, {
+                    color: 'bg-red-300',
+                    label: 'Out',
+                    value: last.temperatureOut!
+                  }] }
                   min={-5}
                   max={45}
                 />
@@ -70,7 +84,15 @@ function App() {
                   min={0}
                   max={100}
                   unit="%"
-                  value={ last?.humidity}
+                  values={ [{
+                    color: 'bg-blue-500',
+                    label: 'In',
+                    value: last.humidity
+                  }, {
+                    color: 'bg-blue-300',
+                    label: 'Out',
+                    value: last.humidityOut!
+                  }] }
                 />
               </div>
             </Box>

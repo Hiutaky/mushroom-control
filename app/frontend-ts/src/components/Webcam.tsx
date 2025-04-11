@@ -1,6 +1,5 @@
 import Button from "./Button"
 import { useBackend } from "../providers/backend.provider"
-
 const Webcam = () => {
     const { ws, image } = useBackend();
 
@@ -14,13 +13,13 @@ const Webcam = () => {
                 <div className="flex flex-row gap-2">
                     <Button
                         disabled={!ws}
-                        onClick={ () => ws ? ws.send('START_STREAM') : null }
+                        // onClick={ () => ws ? ws.send('START_STREAM') : null }
                     >
                         Start
                     </Button>
                     <Button
                         disabled={!ws}
-                        onClick={ () => ws ? ws.send('STOP_STREAM') : null }
+                        // onClick={ () => ws ? ws.send('STOP_STREAM') : null }
                     >
                         Stop
                     </Button>
