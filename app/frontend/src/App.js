@@ -35,7 +35,7 @@ function App() {
           <div className='grid md:grid-cols-[30%_1fr] lg:grid-cols-[20%_1fr] gap-3'>
             <Box direction='col'>
               <span className='font-bold text-sm'>Controllers</span>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <Sensor 
                   label={'Light'}
                   active={last ? last?.led > 0 : false}
@@ -43,9 +43,15 @@ function App() {
                   onClick={ () => last?.led == 0 ? actions.ON_LED() : actions.OFF_LED()  }
                 />
                 <Sensor 
-                  label={'Fan'}
+                  label={'IO Fan'}
                   active={last?.ioFan > 0 || last?.ioFan > 0}
                   onClick={ () => last?.ioFan == 0 ? actions.ON_IO_FAN() : actions.OFF_IO_FAN()  }
+                  icon={icons.Fan}
+                />
+                <Sensor 
+                  label={'Mist Fan'}
+                  active={last?.fan > 0 || last?.fan > 0}
+                  onClick={ () => last?.fan == 0 ? actions.ON_FAN() : actions.OFF_FAN()  }
                   icon={icons.Fan}
                 />
                 <Sensor 

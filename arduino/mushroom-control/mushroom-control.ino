@@ -1,247 +1,256 @@
+/**
+ * Fungando.Venafro Mushroom Arduino Control
+ */
 #include "DHT.h" //by adafruit (download entire library)
 #include "Adafruit_SHT4x.h"
 #include <Wire.h>
 #include <SensirionI2cScd4x.h>
 
-
-Adafruit_SHT4x sht4 = Adafruit_SHT4x();
-
+// Constants
 #define UPDATE_INTERVAL 1000
+#define HOURS_12 (uint32_t)(60 * 60 * 12)
 
-//temperature pin, type dht11
-#define DHT_P 8
+// DHT Sensor Configuration
+#define DHTTYPE DHT11
 #define DHT_OUT_P 2
 
-// interfaccia i2c
-SensirionI2cScd4x scd40;
-
-
-//relé module
-#define LED_P A1//12v, 0.5ah - 6w
-#define FAN_P A2//12v, 0.5ah - 6w
-#define HUM_P A3//24v, 0.8ah - 20w
+// Relay Module Pins
+#define LED_P A1      // 12v, 0.5ah - 6w
+#define FAN_P A2      // 12v, 0.5ah - 6w
+#define HUM_P A3      // 24v, 0.8ah - 20w
 #define INOUTFAN_P A4
-//total consume = 32w/a
+// Total consumption = 32w/a
 
-#define DHTTYPE DHT11
-
-//humidifier settings
+// Humidifier Thresholds
 #define HUM_ON_THRESOLD 84
 #define HUM_OFF_THRESOLD 94
 
-DHT dht_in(DHT_P, DHTTYPE);
+// CO2 Threshold
+#define CO2_HIGH_THRESHOLD 1000
+
+// Timing Constants (in seconds)
+#define IOFAN_ACTIVE_TIME 300
+#define IOFAN_CYCLE_TIME 1800
+
+// Sensor Objects
+Adafruit_SHT4x sht4 = Adafruit_SHT4x();
+SensirionI2cScd4x scd40;
 DHT dht_out(DHT_OUT_P, DHTTYPE);
 
-uint32_t HOURS_12 = (uint32_t) 60 * 60 * 12;
+// Manual Control Flags (Override automatic)
+struct {
+  bool humidifier = false;
+  bool fan = false;
+  bool led = false;
+  bool ioFan = false;
+} manual;
 
-//manual controls - Override automatic
-bool manualHum = false;
-bool manualFan = false;
-bool manualLed = false;
-bool manualIOFan = false;
+// Automatic Control States
+struct {
+  bool led = false;
+  bool humidifier = false;
+  bool ioFan = false;
+} active;
 
-//automatic controls
-bool ledActive = false;
-bool humActive = false;
-bool ioFanActive = false;
-
+// Timers
 float ledTimer = 0;
 float ioFanTimer = 0;
 
+// Sensor Data
+struct {
+  float humidity;
+  float temperature;
+  float humidityOut;
+  float temperatureOut;
+  uint16_t co2;
+  float co2Temp;
+  float co2Humidity;
+} sensorData;
+
 void setup() {
-  initRele(LED_P);
-  initRele(FAN_P);
-  initRele(HUM_P);
-  initRele(INOUTFAN_P);
+  // Initialize relay pins
+  initRelays();
+  
+  // Initialize serial communication
   Serial.begin(9600);
-   if (! sht4.begin()) {
-    Serial.println("Couldn't find SHT4x");
-    while (1) delay(1);
-  }
-  sht4.setPrecision(SHT4X_MED_PRECISION);
-//  sht4.setHeater(SHT4X_MED_HEATER_1S);  
-  sht4.setHeater(SHT4X_NO_HEATER);
-
-  Wire.begin();
-  scd40.begin(Wire, 0x62);
-  scd40.startPeriodicMeasurement();
-
-  dht_in.begin();
+  
+  // Initialize SHT4x sensor
+  initSHT4x();
+  
+  // Initialize CO2 sensor
+  initCO2Sensor();
+  
+  // Initialize DHT sensors
   dht_out.begin();
 }
 
 void loop() {
+  // Read sensor data
+  readSensors();
   
-  sensors_event_t humidity, temp;
-  
-  sht4.getEvent(&humidity, &temp);
-
-  //co2 sensor scd40
-  float co2_temp, co2_hum;
-  uint16_t co2;
-  bool co2ready = false;
-  scd40.getDataReadyStatus(co2ready);
-
-  if (co2ready) {
-    scd40.readMeasurement(co2, co2_temp, co2_hum);
-  }
-
-  float h_out = dht_out.readHumidity();
-  float t_out = dht_out.readTemperature();
-  checkHumidifier(humidity.relative_humidity);
+  // Check and control devices
+  checkHumidifier();
   checkLed();
   checkIOFan();
-
-  readSerial();
-  writeSerial(humidity.relative_humidity, temp.temperature, h_out, t_out, co2, co2_temp, co2_hum);
   
+  // Handle serial communication
+  processSerialCommands();
+  sendSensorData();
+  
+  // Wait for next update
   delay(UPDATE_INTERVAL);
 }
 
-//set rele pins as output and disabled
-void initRele(int pin) {
-  pinMode(pin, OUTPUT);
-  digitalWrite(pin, HIGH);
+// Initialize all relay pins as output and disabled
+void initRelays() {
+  int relayPins[] = {LED_P, FAN_P, HUM_P, INOUTFAN_P};
+  for (int pin : relayPins) {
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, HIGH); // Relays are active LOW
+  }
 }
 
-void writeSerial(float h, float t,float h_out, float t_out, uint16_t co2, float co2_temp, float co2_hum) {
+// Initialize SHT4x temperature/humidity sensor
+void initSHT4x() {
+  if (!sht4.begin()) {
+    Serial.println("Couldn't find SHT4x");
+    while (1) delay(1);
+  }
+  sht4.setPrecision(SHT4X_MED_PRECISION);
+  sht4.setHeater(SHT4X_NO_HEATER);
+}
+
+// Initialize CO2 sensor
+void initCO2Sensor() {
+  Wire.begin();
+  scd40.begin(Wire, 0x62);
+  scd40.startPeriodicMeasurement();
+}
+
+// Read all sensor data
+void readSensors() {
+  // Read SHT4x sensor
+  sensors_event_t humidity, temp;
+  sht4.getEvent(&humidity, &temp);
+  sensorData.humidity = humidity.relative_humidity;
+  sensorData.temperature = temp.temperature;
+  
+  // Read DHT sensors
+  sensorData.humidityOut = dht_out.readHumidity();
+  sensorData.temperatureOut = dht_out.readTemperature();
+  
+  // Read CO2 sensor
+  bool co2ready = false;
+  scd40.getDataReadyStatus(co2ready);
+  if (co2ready) {
+    scd40.readMeasurement(sensorData.co2, sensorData.co2Temp, sensorData.co2Humidity);
+  }
+}
+
+// Send sensor data via serial
+void sendSensorData() {
   String payload = 
-    "temperature:" + String(t) +
-    ",temperatureOut:" + String(t_out) +
-    ",humidity:" + String(h) +
-    ",humidityOut:" + String(h_out) +
-    ",humidifier:" + String(humActive || manualHum) +
-    ",fan:" + String(humActive || manualFan) +
-    ",led:" + String(ledActive || manualLed) +
+    "temperature:" + String(sensorData.temperature) +
+    ",temperatureOut:" + String(sensorData.temperatureOut) +
+    ",humidity:" + String(sensorData.humidity) +
+    ",humidityOut:" + String(sensorData.humidityOut) +
+    ",humidifier:" + String(active.humidifier || manual.humidifier) +
+    ",fan:" + String(active.humidifier || manual.fan) +
+    ",led:" + String(active.led || manual.led) +
     ",ledTimer:"+ String(ledTimer) +
-    ",ioFan:" + String(ioFanActive || manualIOFan) +
-    ",co2:" + String(co2) +
-    ",co2Temp:" + String(co2_temp) +
-    ",co2Hum:" + String(co2_hum);
+    ",ioFan:" + String(active.ioFan || manual.ioFan) +
+    ",co2:" + String(sensorData.co2) +
+    ",co2Temp:" + String(sensorData.co2Temp) +
+    ",co2Hum:" + String(sensorData.co2Humidity);
   Serial.println(payload);
 }
 
-void readSerial() {
+// Process incoming serial commands
+void processSerialCommands() {
   while(Serial.available()) {
-    String command = (String) Serial.readString();
-    //serial commands dispatcher
-    if( command == "ON_LED" ) 
-      on_led();
-    if( command == "OFF_LED" ) 
-      off_led();
-    if( command == "ON_FAN" ) 
-      on_fan();
-    if( command == "OFF_FAN" ) 
-      off_fan();
-    if( command == "ON_HUM" ) 
-      on_hum();
-    if( command == "OFF_HUM" ) 
-      off_hum();
-    if( command == "ON_IO_FAN" ) 
-      on_inoutfan();
-    if( command == "OFF_IO_FAN" ) 
-      off_inoutfan();
+    String command = Serial.readString();
+    
+    // Command dispatcher
+    if (command == "ON_LED") setRelay(LED_P, true, manual.led);
+    else if (command == "OFF_LED") setRelay(LED_P, false, manual.led);
+    else if (command == "ON_FAN") setRelay(FAN_P, true, manual.fan);
+    else if (command == "OFF_FAN") setRelay(FAN_P, false, manual.fan);
+    else if (command == "ON_HUM") setRelay(HUM_P, true, manual.humidifier);
+    else if (command == "OFF_HUM") setRelay(HUM_P, false, manual.humidifier);
+    else if (command == "ON_IO_FAN") setRelay(INOUTFAN_P, true, manual.ioFan);
+    else if (command == "OFF_IO_FAN") setRelay(INOUTFAN_P, false, manual.ioFan);
   }
 }
 
-//manual actions
-void on_led() {
-  if( ! manualLed )
-    manualLed = true;
-  digitalWrite(LED_P, LOW); 
-}
-void off_led() {
-  if( manualLed )
-    manualLed = false;
-  digitalWrite(LED_P, HIGH); 
+// Set relay state and update manual control flag
+void setRelay(int pin, bool turnOn, bool &manualFlag) {
+  manualFlag = turnOn;
+  digitalWrite(pin, turnOn ? LOW : HIGH); // LOW = ON, HIGH = OFF
 }
 
-void on_fan() {
-  if( ! manualFan )
-    manualFan = true;
-  digitalWrite(FAN_P, LOW); 
-}
-void off_fan() {
-  if( manualFan )
-    manualFan = false;
-  digitalWrite(FAN_P, HIGH); 
-}
-
-void on_hum() {
-  if( ! manualHum )
-    manualHum = true;
-  digitalWrite(HUM_P, LOW); 
-}
-void off_hum() {
-  if( manualHum )
-    manualHum = false;
-  digitalWrite(HUM_P, HIGH); 
-}
-
-
-void on_inoutfan() {
-  if( ! manualIOFan )
-    manualIOFan = true;
-  digitalWrite(INOUTFAN_P, LOW); 
-}
-void off_inoutfan() {
-  if( manualIOFan )
-    manualIOFan = false;
-  digitalWrite(INOUTFAN_P, HIGH); 
-}
-
-//automated actions
-void checkHumidifier(float humidity) {
-  //if manual control over LED then skip
-  if( ! manualHum ) {
-    //activate humidifier if humidity <= minimum threshold
-    if( ! humActive && humidity <= HUM_ON_THRESOLD ) {
+// Control humidifier based on humidity level
+void checkHumidifier() {
+  if (!manual.humidifier) {
+    if (!active.humidifier && sensorData.humidity <= HUM_ON_THRESOLD) {
       digitalWrite(FAN_P, LOW);
       digitalWrite(HUM_P, LOW);
-      humActive = true;
+      active.humidifier = true;
     }
-    //deactivate humidifier if humidity >= max threshold
-    if( humActive && humidity >= HUM_OFF_THRESOLD ) {
+    else if (active.humidifier && sensorData.humidity >= HUM_OFF_THRESOLD) {
       digitalWrite(FAN_P, HIGH);
       digitalWrite(HUM_P, HIGH);
-      humActive = false;
+      active.humidifier = false;
     }
   }
 }
-void checkIOFan() {
-  //5min on - 55 min off
-  //if manualLed is on (you tanking over of controls) then skip
-  if( ! manualIOFan ) {
-    if( !ioFanActive && ioFanTimer == 0  ) {
-        digitalWrite(INOUTFAN_P, LOW);
-        ioFanActive = true;
-    }
-    if( ioFanActive && ioFanTimer >= 300 ) {
-      digitalWrite(INOUTFAN_P, HIGH);
-      ioFanActive = false;
-//      ioFanTimer = 0;
-    }
-    ioFanTimer += UPDATE_INTERVAL / 1000;//in seconds
 
-    if( ioFanTimer >= 1800 ) 
-      ioFanTimer = 0;
+// Control in/out fan based on CO2 level or timer
+void checkIOFan() {
+  if (!manual.ioFan) {
+    float secondsElapsed = UPDATE_INTERVAL / 1000.0;
     
+    if (sensorData.co2 > CO2_HIGH_THRESHOLD) {
+      // CO2 level is high, turn on fan if not already on
+      if (!active.ioFan) {
+        digitalWrite(INOUTFAN_P, LOW);
+        active.ioFan = true;
+      }
+    } else {
+      // Use timer-based control
+      if (!active.ioFan && ioFanTimer == 0) {
+        digitalWrite(INOUTFAN_P, LOW);
+        active.ioFan = true;
+      }
+      else if (active.ioFan && ioFanTimer >= IOFAN_ACTIVE_TIME) {
+        digitalWrite(INOUTFAN_P, HIGH);
+        active.ioFan = false;
+      }
+      
+      ioFanTimer += secondsElapsed;
+      
+      if (ioFanTimer >= IOFAN_CYCLE_TIME) {
+        ioFanTimer = 0;
+      }
+    }
   }
 }
+
+// Control LED based on 12-hour cycle
 void checkLed() {
-  //12 hours on - 12 hours off
-  //if manualLed is on (you tanking over of controls) then skip
-  if( ! manualLed ) {
-    if( ! ledActive && ledTimer >= HOURS_12 ) {
+  if (!manual.led) {
+    float secondsElapsed = UPDATE_INTERVAL / 1000.0;
+    
+    if (!active.led && ledTimer >= HOURS_12) {
       digitalWrite(LED_P, LOW);
-      ledActive = true;
+      active.led = true;
       ledTimer = 0;
     }
-    if( ledActive && ledTimer >= HOURS_12 ) {
+    else if (active.led && ledTimer >= HOURS_12) {
       digitalWrite(LED_P, HIGH);
-      ledActive = false;
+      active.led = false;
       ledTimer = 0;
     }
-    ledTimer += UPDATE_INTERVAL / 1000;//in seconds
+    
+    ledTimer += secondsElapsed;
   }
 }

@@ -11,7 +11,11 @@ export type Stat = {
   humidityOut?: number;
   humidifier: boolean;
   led: boolean;
-  ioFan: boolean
+  ioFan: boolean;
+  //co2 sensor
+  co2: number;
+  co2Temp: number;
+  co2Hum: number;
 }
 
 type BackendState = {

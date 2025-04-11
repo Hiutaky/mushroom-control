@@ -5,19 +5,19 @@ import Config, { getWsHost } from "../config"
 const Webcam = () => {
     const [base64Frame, setFrame] = useState('')
     const [ready, setReady] = useState(false)
-    const ws = useMemo( ( )=> new WebSocket(getWsHost()), [])
+    //const ws = useMemo( ( )=> new WebSocket(getWsHost()), [])
 
-    const fetchWebcam = () => {
-        ws.onopen = () => {
-            setReady(true)
-        }
-        ws.onmessage = (message) => {
-            setFrame(message.data)
-        }
-    }
+    // const fetchWebcam = () => {
+    //     /*ws.onopen = () => {
+    //         setReady(true)
+    //     }*/
+    //     ws.onmessage = (message) => {
+    //         setFrame(message.data)
+    //     }
+    // }
 
     useEffect( () => {
-        fetchWebcam()
+        //fetchWebcam()
     }, [])
 
     return (
@@ -29,13 +29,13 @@ const Webcam = () => {
                 <div className="flex flex-row gap-2">
                     <Button
                         disabled={!ready}
-                        onClick={ () => ws.send('START_STREAM')}
+                        // onClick={ () => ws.send('START_STREAM')}
                     >
                         Start
                     </Button>
                     <Button
                         disabled={!ready}
-                        onClick={ () => ws.send('STOP_STREAM')}
+                        // onClick={ () => ws.send('STOP_STREAM')}
                     >
                         Stop
                     </Button>
