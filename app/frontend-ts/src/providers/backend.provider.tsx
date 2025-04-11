@@ -99,7 +99,11 @@ export const useBackendProvider = () => {
     useEffect(() => {
         fetchBackend();
         const interval = setInterval( () => {
+          try {
             fetchBackend();
+          } catch (e ) {
+            clearInterval(interval)
+          }
         }, 4000)
         return () => clearInterval(interval)
     }, []);
