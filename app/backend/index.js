@@ -17,7 +17,7 @@ const fake = process.env.ENV === "development"
 const app = express();
 const port = process.env.SERVER_PORT;
 const wsPort = process.env.WS_PORT;
-const WSS = new WebSocketServer({ port: 3045 })
+const WSS = new WebSocketServer({ port: 30458 })
 
 let ffmpeg = false
 
@@ -78,13 +78,13 @@ const main = ( ) => {
             if( count === 30 )
                 light = ! light
             count++
-        }, 10000)
+        }, 5000)
 
     /** APP */
     app.use(cors())
 
     app.get('/info', (req, res) => {
-        db.find({}).sort({ createdAt: -1 }).limit(5000).exec((err, docs) => {
+        db.find({}).sort({ createdAt: -1 }).limit(1000).exec((err, docs) => {
             if (err) {
                 console.error(err);
                 res.status(500).send('Error occurred while fetching data');

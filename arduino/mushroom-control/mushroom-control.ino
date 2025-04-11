@@ -3,7 +3,7 @@
 
 Adafruit_SHT4x sht4 = Adafruit_SHT4x();
 
-#define UPDATE_INTERVAL 10000
+#define UPDATE_INTERVAL 1000
 
 //temperature pin, type dht11
 #define DHT_P 8
@@ -195,13 +195,13 @@ void checkIOFan() {
     if( ioFanActive && ioFanTimer >= 300 ) {
       digitalWrite(INOUTFAN_P, HIGH);
       ioFanActive = false;
-      ioFanTimer = 0;
+//      ioFanTimer = 0;
     }
+    ioFanTimer += UPDATE_INTERVAL / 1000;//in seconds
 
-    if( ioFanTimer >= 3600 ) 
+    if( ioFanTimer >= 1800 ) 
       ioFanTimer = 0;
     
-    ioFanTimer += UPDATE_INTERVAL / 1000;//in seconds
   }
 }
 void checkLed() {
